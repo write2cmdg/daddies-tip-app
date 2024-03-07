@@ -4,22 +4,28 @@ import {
 } from 'react-router-dom';
 import Dashboard, { dashboardLoader } from './pages/Dashboard';
 import Error from './pages/Error';
+import Main, { mainLoader } from './layouts/Main';
+import { logoutAcion } from './actions/logout';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<Dashboard />,
-    loader: dashboardLoader,
-    errorElement: <Error />
-  },
-  {
-    path: "/transactions",
-    element:<h1>Transaction Tracker</h1>
-  },
-  {
-    path: "/tips",
-    element:<h1>TIPS Calendar</h1>
-  },
+    element:<Main />,
+    loader: mainLoader,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/",
+        element:<Dashboard />,
+        loader: dashboardLoader
+      },
+      {
+        path: "logout",
+        action: logoutAcion
+      }
+      
+    ]
+  }
 ]);
 
 function App() {
