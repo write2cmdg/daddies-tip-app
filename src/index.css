@@ -12,10 +12,19 @@ img {
   display: block;
   max-width: 100%;
 }
+.img-center {
+  display: block;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+}
 
 svg {
   pointer-events: none;
 }
+
+
 
 :root {
   /* fonts */
@@ -202,6 +211,13 @@ p {
 }
 
 /* utility layouts */
+
+.container {
+  /* width: 100vw; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
 
 .flex-lg {
   display: -webkit-box;

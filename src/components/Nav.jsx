@@ -2,6 +2,7 @@ import React from 'react'
 
 //assets
 import logomark from "../assets/logomark.svg"
+import daddiesLogo from '../assets/daddies-logo-blk-transp.png'
 
 //rrd
 import { Form, NavLink } from 'react-router-dom'
@@ -16,8 +17,10 @@ const Nav = ({userName}) => {
         to="/"
         aria-label='Go to Home'
         >
-        <img src={logomark} alt="" height={30} />
-        <span>Daddies App</span>
+            <div className='container'>
+             <img src={daddiesLogo} alt="" width={360} className='intro'/> 
+
+            </div>
         </NavLink>
         {
             userName && (
@@ -31,7 +34,7 @@ const Nav = ({userName}) => {
                     }}
                 >
                     <button type="submit" className='btn btn--warning'>
-                        <span>Delete user</span>
+                        <span>Closeout</span>
                         <TrashIcon width={20} />
                     </button>
 
