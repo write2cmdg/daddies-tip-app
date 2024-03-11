@@ -18,7 +18,7 @@ const Nav = ({userName}) => {
         aria-label='Go to Home'
         >
             <div className='container'>
-             <img src={daddiesLogo} alt="" width={360} className='intro'/> 
+             <img src={daddiesLogo} alt="" /> 
 
             </div>
         </NavLink>
@@ -28,8 +28,11 @@ const Nav = ({userName}) => {
                     method="post"
                     action="/logout"
                     onSubmit={(event) => {
-                        if (!confirm("Delete user and all data?")) {
-                            event.preventDefault()
+                        if (!confirm("Ready to close out?")) {
+                           } else {
+                            if (!confirm("Any payouts, comps/voids, gift cards, etc?")) {
+                                event.preventDefault()
+                            }
                         }
                     }}
                 >

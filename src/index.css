@@ -213,7 +213,7 @@ p {
 /* utility layouts */
 
 .container {
-  /* width: 100vw; */
+  width: 100vw;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -301,6 +301,16 @@ p {
 }
 
 main {
+  max-width: 1500px;
+  width: 100%;
+  padding: var(--space-md) var(--space-md) ;
+  margin-inline: auto;
+  display: -ms-grid;
+  display: grid;
+  place-items: start;
+}
+
+my-main {
   max-width: 1500px;
   width: 100%;
   padding: var(--space-md) var(--space-md) var(--space-xl);

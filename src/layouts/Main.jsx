@@ -23,7 +23,7 @@ const Main = () => {
         <main>
             <Outlet />
         </main>
-        <img src={wave} alt="" />
+        {/* <img src={wave} alt="" /> */}
     </div>
   )
 }

@@ -18,7 +18,7 @@ export async function dashboardAction({request}){
     const formData = Object.fromEntries(data)
     try {
         localStorage.setItem("userName", JSON.stringify(formData.userName))
-        return toast.success(`Welcome, ${formData.userName}`)
+        return toast.success(`Have a great shift, ${formData.userName}!`)
     } catch (e) {
         throw new Error("There was a problem. Try again")
     }
