@@ -9,7 +9,10 @@ export async function logoutAcion() {
     deleteItem({
         key: "userName"
     })
-    toast.success("Thank you! Enjoy your day ;)")
+    deleteItem({
+        key: "shifts"
+    })
+    toast.success("Thank you! Come back soon! ;)")
     //redirect to home
     return redirect("/")
 }

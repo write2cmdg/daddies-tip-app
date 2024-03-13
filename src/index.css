@@ -213,10 +213,26 @@ p {
 /* utility layouts */
 
 .container {
+  /* width: 100vw; */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.container2 {
   width: 100vw;
   text-align: center;
   display: flex;
   justify-content: center;
+}
+.container3 {
+  width: 100vw;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.container-logout {
+  /* width: 100%; */
+  display: inline-block;
 }
 
 .flex-lg {
@@ -332,7 +348,7 @@ nav {
   -ms-flex-align: center;
   align-items: center;
   width: 100%;
-  padding: var(--space-md);
+  /* padding: var(--space-md); */
   max-width: 1500px;
   margin-inline: auto;
 }
@@ -425,6 +441,11 @@ select {
   display: grid;
   gap: var(--space-sm);
   max-width: 25ch;
+}
+
+.intro img {
+  /* width: 10px; */
+  position: relative;
 }
 
 /* dashboard */

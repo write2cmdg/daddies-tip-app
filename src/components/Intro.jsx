@@ -11,10 +11,10 @@ const Intro = () => {
       <div>
 
         <div className='container'>
-            <img src={splashImg} alt="" className='expense-input'/>
+            <img src={splashImg} alt=""/>
         </div>
 
-        <p>Enter your name to start shift.</p>
+        <p>Enter your name to start.</p>
         <Form method="post">
             <input 
                 type="text" 
@@ -23,6 +23,7 @@ const Intro = () => {
                 aria-label='Your name' 
                 autoComplete='given-name'
                 />
+                <input type="hidden" name='_action' value="newUser" />
             <button type='submit' className='btn btn--dark'>
                 <span>Start Shift</span>
                 <ArrowTopRightOnSquareIcon width={20}/>  

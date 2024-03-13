@@ -12,34 +12,36 @@ import { TrashIcon } from "@heroicons/react/24/solid"
 
 const Nav = ({userName}) => {
   return (
-    <nav>
+    <nav className='container2'>
         <NavLink
         to="/"
         aria-label='Go to Home'
         >
-            <div className='container'>
-             <img src={daddiesLogo} alt="" /> 
-
+            <div>
+                 <img src={daddiesLogo} alt="" width={300} /> 
             </div>
         </NavLink>
         {
             userName && (
-                <Form
+                <Form className='container3'
                     method="post"
                     action="/logout"
                     onSubmit={(event) => {
-                        if (!confirm("Ready to close out?")) {
-                           } else {
-                            if (!confirm("Any payouts, comps/voids, gift cards, etc?")) {
+                        if (!confirm("This will delete user and all shifts. Continue?")) {
+                            event.preventDefault()
+                        } else {
+                            if (!confirm('This action is permanent. Continue?')) {
                                 event.preventDefault()
                             }
                         }
                     }}
                 >
-                    <button type="submit" className='btn btn--warning'>
-                        <span>Closeout</span>
-                        <TrashIcon width={20} />
-                    </button>
+                    <div className='container-logout'>
+                        <button type="submit" className='btn btn--warning'>
+                            <span>Delete User</span>
+                            <TrashIcon width={20} />
+                        </button>
+                    </div>
 
                 </Form>
             )

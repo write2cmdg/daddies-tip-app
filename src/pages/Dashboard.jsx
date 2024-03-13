@@ -1,26 +1,42 @@
 import React from 'react'
 
 //helper functions
-import { fetchData } from '../helpers'
+import { createShift, fetchData } from '../helpers'
 import { useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
+import AddShiftForm from '../components/AddShiftForm'
 
 //loader
 export function dashboardLoader() {
     const userName = fetchData("userName")
-    return { userName }
+    const shifts = fetchData("shifts")
+    return { userName, shifts }
 }
 
 //action
 export async function dashboardAction({request}){
     const data = await request.formData()
-    const formData = Object.fromEntries(data)
-    try {
-        localStorage.setItem("userName", JSON.stringify(formData.userName))
-        return toast.success(`Have a great shift, ${formData.userName}!`)
-    } catch (e) {
-        throw new Error("There was a problem. Try again")
+    const {_action, ...values} = Object.fromEntries(data)
+
+    //new user submission
+    if (_action === "newUser") {
+        try {
+            localStorage.setItem("userName", JSON.stringify(values.userName))
+            return toast.success(`Welcome, ${values.userName}!`)
+        } catch (e) {
+            throw new Error("There was a problem. Try again")
+        }
+    }
+    if (_action === "newShift") {
+        try {
+            createShift({
+                shift: values.newShift,
+            })
+            return toast.success('Shift started')
+        } catch (e) {
+            throw new Error("There was a problem starting your shift")
+        }
     }
 }
 
@@ -29,7 +45,19 @@ const Dashboard = () => {
 
   return (
     <>
-       {userName ? (<p>{userName}</p>) : <Intro />}     
+       {userName ? (
+        <div className="dashboard">
+            <h1>Welcome back, <span className='accent'>{userName}</span></h1>
+            <div className="grid-sm">
+                {/* Shifts ? () : () */}
+                <div className="grid-lg">
+                    <div className="flex-lg">
+                        <AddShiftForm />
+                    </div>
+                </div>
+            </div>
+        </div>
+        ) : <Intro />}     
     </>
   )
 }
