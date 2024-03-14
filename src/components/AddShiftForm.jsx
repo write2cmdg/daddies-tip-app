@@ -9,7 +9,12 @@ const AddShiftForm = () => {
       <Form method='post' className='grid-sm'>
         <div className="grid-xs">
           <label htmlFor="newShift">Select One:</label>
-           <input type="text" name='newShift' id='newShift' required placeholder='Choose Shift' />
+           {/*<input type="text" name='newShift' id='newShift' required placeholder='Choose Shift' /> */}
+           <select>
+            <option>Select One</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+           </select>
            <input type="hidden" name='_action' value="newShift" />
            <button type='submit' className='btn btn--dark'>
             <span>Start Shift</span>
