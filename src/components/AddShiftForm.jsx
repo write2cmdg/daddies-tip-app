@@ -11,9 +11,11 @@ const AddShiftForm = () => {
           <label htmlFor="newShift">Select One:</label>
            {/*<input type="text" name='newShift' id='newShift' required placeholder='Choose Shift' /> */}
            <select>
-            <option>Select One</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
+              <option value="default">Select Shift</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Brunch</option>
+              <option>Delivery</option>
            </select>
            <input type="hidden" name='_action' value="newShift" />
            <button type='submit' className='btn btn--dark'>
