@@ -25,9 +25,10 @@ const formattedDate = `${mm}${dd}${yyyy}`;
 
 //create shift
 
-export const createShift = ({ shift, date}) => {
+export const createShift = ({ shift, date }) => {
     const newItem = {
         id: crypto.randomUUID(),
+        server: fetchData("userName"),
         shift: shift,
         date: formattedDate,
         createdAt: Date.now(),

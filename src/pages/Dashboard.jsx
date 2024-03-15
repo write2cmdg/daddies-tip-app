@@ -28,6 +28,7 @@ export async function dashboardAction({request}){
             throw new Error("There was a problem. Try again")
         }
     }
+    //new shift
     if (_action === "newShift") {
         try {
             createShift({
