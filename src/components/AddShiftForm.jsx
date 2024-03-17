@@ -1,13 +1,24 @@
 import { ClockIcon } from '@heroicons/react/24/outline'
-import React, { useState } from 'react'
-import { Form } from 'react-router-dom'
+impotrt React, { useState } from 'react'
+import { Form, useFetcher } from 'react-router-dom'
+import { useRef } from 'react'
 
 const AddShiftForm = () => {
+  const fetcher = useFetcher()
+  const isSubmitting = fetcher.state === "submitting"
+
+  const formRef = useRef()
+
   const [selected, setSelected] = useState()
 
+useEffect(() => {
+  if(!isSubmitting) {
+    formRef.current.reset()
+  }
+}, [isSubmitting])
   return (
     <div className='form-wrapper'>
-      <Form method='post' className='grid-sm'>
+      <fetcher.Form method='post' className='grid-sm'>
         <div className="grid-xs">
           <label htmlFor="newShift" className='h2'>Start a new shift</label>
           <p>Select one:</p>
@@ -22,12 +33,12 @@ const AddShiftForm = () => {
               <option  key="Delivery" value="Delivery">Delivery</option>
            </select>
            <input type="hidden" name='_action' value="newShift" />
-           <button type='submit' className='btn btn--dark'>
+           <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
             <span>Start Shift</span>
             <ClockIcon width={20} />
            </button>
         </div>
-      </Form>
+      </fetcher.Form>
     </div>
   )
 }

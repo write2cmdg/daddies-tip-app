@@ -5,6 +5,9 @@ const generateRandomColor = () => {
     return `${existingShiftLength * 34} 65% 50%` 
 }
 
+// delay
+export const waait = () => new Promise(res )
+
 // local storage
 export const fetchData = (key) => {
     return JSON.parse(localStorage.getItem(key));
