@@ -6,7 +6,7 @@ const generateRandomColor = () => {
 }
 
 // delay
-export const waait = () => new Promise(res )
+export const waait = () => new Promise(res => setTimeout(res, Math.random() * 2500))
 
 // local storage
 export const fetchData = (key) => {

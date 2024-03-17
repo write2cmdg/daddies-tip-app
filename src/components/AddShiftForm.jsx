@@ -1,5 +1,5 @@
 import { ClockIcon } from '@heroicons/react/24/outline'
-impotrt React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, useFetcher } from 'react-router-dom'
 import { useRef } from 'react'
 
@@ -7,13 +7,10 @@ const AddShiftForm = () => {
   const fetcher = useFetcher()
   const isSubmitting = fetcher.state === "submitting"
 
-  const formRef = useRef()
-
   const [selected, setSelected] = useState()
 
 useEffect(() => {
   if(!isSubmitting) {
-    formRef.current.reset()
   }
 }, [isSubmitting])
   return (
@@ -34,8 +31,14 @@ useEffect(() => {
            </select>
            <input type="hidden" name='_action' value="newShift" />
            <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
-            <span>Start Shift</span>
-            <ClockIcon width={20} />
+            {(isSubmitting) ? (
+              <p>Processing...</p>
+            ) : (
+              <>
+                <span>Create Shift</span>
+                <ClockIcon width={20} />
+              </>
+            )}
            </button>
         </div>
       </fetcher.Form>
