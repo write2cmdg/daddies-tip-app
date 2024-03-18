@@ -1,11 +1,14 @@
 import React from 'react'
 
-import { Form } from 'react-router-dom'
+import { Form, useFetcher } from 'react-router-dom'
 
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
+import { UserPlusIcon } from '@heroicons/react/24/outline'
 import splashImg from '../assets/margherita.jpeg'
 
 const Intro = () => {
+  const fetcher = useFetcher()
+  const isSubmitting = fetcher.state === "submitting"
+
   return (
     <div className='intro'>
       <div>
@@ -14,8 +17,8 @@ const Intro = () => {
             <img src={splashImg} alt=""/>
         </div>
 
-        <p>Enter your name to start.</p>
-        <Form method="post">
+        <p>Welcome to Daddies' family!</p>
+        <fetcher.Form method="post">
             <input 
                 type="text" 
                 name="userName" 
@@ -24,11 +27,17 @@ const Intro = () => {
                 autoComplete='given-name'
                 />
                 <input type="hidden" name='_action' value="newUser" />
-            <button type='submit' className='btn btn--dark'>
-                <span>Start Shift</span>
-                <ArrowTopRightOnSquareIcon width={20}/>  
-            </button>
-        </Form>
+                <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
+            {(isSubmitting) ? (
+              <p>Processing...</p>
+            ) : (
+              <>
+                <span>Create account</span>
+                < UserPlusIcon width={20} />
+              </>
+            )}
+           </button>
+        </fetcher.Form>
       </div>
     </div>
   )

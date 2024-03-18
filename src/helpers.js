@@ -6,7 +6,7 @@ const generateRandomColor = () => {
 }
 
 // delay
-export const waait = () => new Promise(res => setTimeout(res, Math.random() * 2500))
+export const waait = () => new Promise(res => setTimeout(res, Math.random() * 750))
 
 // local storage
 export const fetchData = (key) => {
@@ -40,4 +40,23 @@ export const createShift = ({ shift, date }) => {
 
     const existingShifts = fetchData("shifts") ?? [];
     return localStorage.setItem("shifts", JSON.stringify([...existingShifts, newItem]))
+ }
+
+
+
+//create transaction
+
+export const createTransaction = ({ check, tips, payment }) => {
+    const newItem = {
+        id: crypto.randomUUID(),
+        server: fetchData("userName"),
+        date: formattedDate,
+        check: check,
+        tips: tips,
+        payment: payment,
+        createdAt: Date.now(),
+    }
+
+    const existingTransactions = fetchData("transactions") ?? [];
+    return localStorage.setItem("transactions", JSON.stringify([...existingTransactions, newItem]))
  }

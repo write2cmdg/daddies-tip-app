@@ -1,17 +1,19 @@
 import React from 'react'
 
 //helper functions
-import { createShift, fetchData, waait } from '../helpers'
+import { createShift, createTransaction, fetchData, waait } from '../helpers'
 import { useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
+import AddTransactionForm from '../components/AddTransactionForm'
 
 //loader
 export function dashboardLoader() {
     const userName = fetchData("userName")
     const shifts = fetchData("shifts")
-    return { userName, shifts }
+    const transactions = fetchData("transactions")
+    return { userName, shifts, transactions }
 }
 
 //action
@@ -19,7 +21,7 @@ export async function dashboardAction({ request }){
     await waait()
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data)
-
+    
     //new user submission
     if (_action === "newUser") {
         try {
@@ -40,6 +42,21 @@ export async function dashboardAction({ request }){
             throw new Error("There was a problem starting your shift")
         }
     }
+    //new Transaction
+    if (_action === "createTransaction") {
+        try {
+            createTransaction({
+                check: values.newCheckTotal,
+                tips: values.newCheckTips,
+                payment: values.newPaymentType,
+            })
+            const updatedTransactions = fetchData("transactions") || []
+            localStorage.setItem("transactions", JSON.stringify(updatedTransactions))
+            return toast.success('Check succesfully added')
+        } catch (e) {
+            throw new Error("There was a problem adding this check")
+        }
+    }
 }
 
 const Dashboard = () => {
@@ -49,12 +66,13 @@ const Dashboard = () => {
     <>
        {userName ? (
         <div className="dashboard">
-            <h1>Welcome back, <span className='accent'>{userName}</span></h1>
+            <h1><span className='accent'>{userName}</span></h1>
             <div className="grid-sm">
                 {/* Shifts ? () : () */}
                 <div className="grid-lg">
                     <div className="flex-lg">
                         <AddShiftForm />
+                        <AddTransactionForm />
                     </div>
                 </div>
             </div>

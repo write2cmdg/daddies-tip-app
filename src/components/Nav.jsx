@@ -8,7 +8,7 @@ import daddiesLogo from '../assets/daddies-logo-blk-transp.png'
 import { Form, NavLink } from 'react-router-dom'
 
 //library imports
-import { TrashIcon } from "@heroicons/react/24/solid"
+import { UserMinusIcon } from '@heroicons/react/24/outline'
 
 const Nav = ({userName}) => {
   return (
@@ -39,7 +39,7 @@ const Nav = ({userName}) => {
                     <div className='container-logout'>
                         <button type="submit" className='btn btn--warning'>
                             <span>Delete User</span>
-                            <TrashIcon width={20} />
+                            <UserMinusIcon width={20} />
                         </button>
                     </div>
 
