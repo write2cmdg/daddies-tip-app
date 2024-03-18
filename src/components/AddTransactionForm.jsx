@@ -68,7 +68,7 @@ const AddTransactionForm = () => {
               <p>Processing...</p>
             ) : (
               <>
-                <span>Add Transaction</span>
+                <span>Add Check</span>
                 <CurrencyDollarIcon width={20} />
               </>
             )}
