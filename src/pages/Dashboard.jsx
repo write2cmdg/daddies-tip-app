@@ -67,7 +67,7 @@ const Dashboard = () => {
     <>
        {userName ? (
         <div className="dashboard">
-            <h1><span className='accent'>{userName}</span></h1>
+            <h1>Hi, <span className='accent'>{userName}</span></h1>
             <div className="grid-sm">
                 {/* Shifts ? () : () */}
                 <div className="grid-lg">

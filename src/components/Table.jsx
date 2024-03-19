@@ -11,7 +11,7 @@ const Table = ({ shifts }) => {
             <thead>
                 <tr>
                     {
-                        [ "Date", "Day", "Shift" ].map((i, index) => (
+                        [ "Date", "Day", "Shift", "Status" ].map((i, index) => (
                             <th key={index}>{i}</th>
                         ))
                     }
@@ -21,9 +21,6 @@ const Table = ({ shifts }) => {
             <tbody>
                 {
                     shifts.map((shift) => (
-                        // <tr key={shift.id}>
-                        //     <h3>{shift.date} {shift.day} {shift.shift}</h3>
-                        // </tr>
                         <tr>
                             <ShiftItem shift={shift} />
                         </tr>
