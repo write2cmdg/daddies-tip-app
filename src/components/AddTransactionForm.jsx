@@ -1,5 +1,5 @@
 //react
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 //rrd
 import { useFetcher } from 'react-router-dom'
@@ -12,10 +12,16 @@ const AddTransactionForm = () => {
     const fetcher = useFetcher()
     const formRef = useRef()
     const focusRef = useRef()
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState("CreditCard")
     const isSubmitting = fetcher.state === "submitting"
 
-
+    useEffect(() => {
+      if(!isSubmitting) {
+        formRef.current.reset()
+        focusRef.current.focus()
+        setSelected("CreditCard")
+      }
+    }, [isSubmitting])
 
   return (
     <div className='form-wrapper'>
@@ -33,7 +39,7 @@ const AddTransactionForm = () => {
                         inputMode='decimal'
                         name='newCheckTotal'
                         id='newCheckTotal'
-                        placeholder='Required...'
+                        placeholder='Enter amount'
                         ref={focusRef}
                         required />
                 </div>
@@ -45,7 +51,7 @@ const AddTransactionForm = () => {
                         inputMode='decimal'
                         name='newCheckTips'
                         id='newCheckTips'
-                        placeholder='Required...'
+                        placeholder='Enter amount'
                         required />
                 </div>
                 <div className="grid-xs">
