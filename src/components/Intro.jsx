@@ -17,7 +17,7 @@ const Intro = () => {
             <img src={splashImg} alt=""/>
         </div>
 
-        <p>Welcome to Daddies' family!</p>
+        <p className='h3'>Welcome to Daddies' family!</p>
         <fetcher.Form method="post">
             <input 
                 type="text" 
@@ -32,7 +32,7 @@ const Intro = () => {
               <p>Processing...</p>
             ) : (
               <>
-                <span>Create account</span>
+                <span>Join Us!</span>
                 < UserPlusIcon width={20} />
               </>
             )}

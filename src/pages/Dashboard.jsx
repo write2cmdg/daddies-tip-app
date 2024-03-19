@@ -7,6 +7,7 @@ import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
 import AddTransactionForm from '../components/AddTransactionForm'
+import Table from '../components/Table'
 
 //loader
 export function dashboardLoader() {
@@ -60,7 +61,7 @@ export async function dashboardAction({ request }){
 }
 
 const Dashboard = () => {
-    const { userName } = useLoaderData()
+    const { userName, shifts, transactions } = useLoaderData()
 
   return (
     <>
@@ -72,7 +73,18 @@ const Dashboard = () => {
                 <div className="grid-lg">
                     <div className="flex-lg">
                         <AddShiftForm />
-                        <AddTransactionForm />
+                        {/* <AddTransactionForm /> */}
+                        <div>
+                            {
+                                shifts && shifts.length > 0 && (
+                                    <div className="grid-md">
+                                        <h2>Shift History</h2>
+                                        <Table shifts={shifts.sort((a, b) => b.createdAt - a.createdAt) } />
+                                    </div>
+                                )
+                            }
+                        </div>
+
                     </div>
                 </div>
             </div>

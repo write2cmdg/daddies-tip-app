@@ -23,8 +23,8 @@ const currentDate = new Date(Date.now());
 const mm = String(currentDate.getMonth() + 1).padStart(2, '0');
 const dd = String(currentDate.getDate()).padStart(2, '0');
 const yyyy = currentDate.getFullYear();
-const formattedDate = `${mm}${dd}${yyyy}`;
-
+const formattedDate = `${mm}-${dd}-${yyyy}`;
+const day = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
 
 //create shift
 
@@ -35,7 +35,7 @@ export const createShift = ({ shift, date }) => {
         shift: shift,
         date: formattedDate,
         createdAt: Date.now(),
-        color: generateRandomColor()
+        day: day,
     }
 
     const existingShifts = fetchData("shifts") ?? [];

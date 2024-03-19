@@ -27,7 +27,7 @@ const Nav = ({userName}) => {
                     method="post"
                     action="/logout"
                     onSubmit={(event) => {
-                        if (!confirm("This will delete user and all shifts. Continue?")) {
+                        if (!confirm("User, shift and transaction history will be deleted. Continue?")) {
                             event.preventDefault()
                         } else {
                             if (!confirm('This action is permanent. Continue?')) {
