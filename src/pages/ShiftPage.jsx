@@ -46,8 +46,14 @@ const ShiftPage = () => {
         <>
             <AddTransactionForm />
             <div className="grid-md">
-                <h2>Transaction History</h2>
-                <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
+            {
+                transactions && transactions.length > 0 && (
+                    <div className="grid-md">
+                        <h2>Shift History</h2>
+                        <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
+                    </div>
+                )
+            }
             </div>
 
 
