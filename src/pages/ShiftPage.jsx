@@ -3,6 +3,7 @@ import { createTransaction, fetchData, waait } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
 import { useLoaderData } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import TransactionsTable from '../components/TransactionsTable'
 
 
 //loader
@@ -44,6 +45,22 @@ const ShiftPage = () => {
     return (
         <>
             <AddTransactionForm />
+            <div className="grid-md">
+                <h2>Transaction History</h2>
+                <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
+            </div>
+
+
+
+            {/* <ul>
+            {
+                transactions.map((transaction) => (
+                    <li key={transaction.id}>
+                        {`Check Total: ${transaction.check}, TIPS: ${transaction.tips}, Payment: ${transaction.payment}`}
+                    </li>
+                ))
+            }
+            </ul> */}
         </>
   )
 }
