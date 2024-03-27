@@ -23,7 +23,7 @@ const AddShiftForm = () => {
     <div className='form-wrapper'>
       <fetcher.Form method='post' className='grid-sm'>
         <div className="grid-xs">
-          <label htmlFor="newShift" className='h2'>Start a new shift</label>
+          <label htmlFor="newShift" className='h2'>Create Shift</label>
           <p>Select one:</p>
           <select
             value={selected}

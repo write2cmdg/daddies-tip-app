@@ -6,7 +6,6 @@ import { useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
-import AddTransactionForm from '../components/AddTransactionForm'
 import Table from '../components/Table'
 
 //loader
@@ -73,7 +72,6 @@ const Dashboard = () => {
                 <div className="grid-lg">
                     <div className="flex-lg">
                         <AddShiftForm />
-                        {/* <AddTransactionForm /> */}
                         <div>
                             {
                                 shifts && shifts.length > 0 && (

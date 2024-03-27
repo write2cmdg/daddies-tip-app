@@ -21,7 +21,7 @@ const Table = ({ shifts }) => {
             <tbody>
                 {
                     shifts.map((shift) => (
-                        <tr>
+                        <tr key={shift.id}>
                             <ShiftItem shift={shift} />
                         </tr>
                     ))
