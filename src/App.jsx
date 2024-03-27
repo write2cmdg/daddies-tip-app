@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         action: dashboardAction
       },
       {
-        path: "ShiftPage",
+        path: "ShiftPage/:id",
         element:<ShiftPage />,
         loader: shiftPageLoader,
         action: shiftPageAction

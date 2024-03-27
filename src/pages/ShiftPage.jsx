@@ -1,7 +1,7 @@
 import React from 'react'
 import { createTransaction, fetchData, waait } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import TransactionsTable from '../components/TransactionsTable'
 
@@ -28,6 +28,7 @@ export async function shiftPageAction({ request }){
                 check: values.newCheckTotal,
                 tips: values.newCheckTips,
                 payment: values.newPaymentType,
+                shiftId: values.shiftId
             })
             const updatedTransactions = fetchData("transactions") || []
             localStorage.setItem("transactions", JSON.stringify(updatedTransactions))
@@ -40,7 +41,7 @@ export async function shiftPageAction({ request }){
 
 const ShiftPage = () => {
     const { userName, shifts, transactions } = useLoaderData()
-
+    let { id } = useParams();
     
     return (
         <>
@@ -49,24 +50,13 @@ const ShiftPage = () => {
             {
                 transactions && transactions.length > 0 && (
                     <div className="grid-md">
-                        <h2>Shift History</h2>
+                        <h2>Shift History:</h2>
                         <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
                     </div>
                 )
             }
             </div>
 
-
-
-            {/* <ul>
-            {
-                transactions.map((transaction) => (
-                    <li key={transaction.id}>
-                        {`Check Total: ${transaction.check}, TIPS: ${transaction.tips}, Payment: ${transaction.payment}`}
-                    </li>
-                ))
-            }
-            </ul> */}
         </>
   )
 }

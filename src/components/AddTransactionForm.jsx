@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 //rrd
-import { useFetcher } from 'react-router-dom'
+import { useFetcher, useParams } from 'react-router-dom'
 
 //library imports
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline'
@@ -14,7 +14,7 @@ const AddTransactionForm = () => {
     const focusRef = useRef()
     const [selected, setSelected] = useState("CreditCard")
     const isSubmitting = fetcher.state === "submitting"
-
+    
     useEffect(() => {
       if(!isSubmitting) {
         formRef.current.reset()
@@ -22,9 +22,12 @@ const AddTransactionForm = () => {
         setSelected("CreditCard")
       }
     }, [isSubmitting])
-
-  return (
-    <div className='form-wrapper'>
+    let {id} = useParams()
+    const shiftId = id
+    console.log("shiftId: ", shiftId)
+    return (
+      
+      <div className='form-wrapper'>
       <h2>Add Check</h2>
       <fetcher.Form 
         method="post"
@@ -69,6 +72,7 @@ const AddTransactionForm = () => {
                 <option key="GiftCard" value="GiftCard">Gift Card</option>
           </select>
           <input type="hidden" name='_action' value="createTransaction" />
+          <input type="hidden" name='shiftId' id='shiftId' value={shiftId} />
           <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
             {(isSubmitting) ? (
               <p>Processing...</p>

@@ -72,8 +72,18 @@ const Dashboard = () => {
                 <div className="grid-lg">
                     <div className="flex-lg">
                         <AddShiftForm />
+
+                    </div>
+                </div>
                         <div>
                             {
+                                !shifts && (
+                                    <div className="grid-md">
+                                        <h2><small>Create a shift to begin.</small></h2>
+                                    </div>
+                                )
+                                }
+                                {
                                 shifts && shifts.length > 0 && (
                                     <div className="grid-md">
                                         <h2>Shift History</h2>
@@ -82,9 +92,6 @@ const Dashboard = () => {
                                 )
                             }
                         </div>
-
-                    </div>
-                </div>
             </div>
         </div>
         ) : <Intro />}     
