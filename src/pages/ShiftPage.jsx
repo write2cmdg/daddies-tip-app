@@ -50,7 +50,7 @@ const ShiftPage = () => {
             {
                 transactions && transactions.length > 0 && (
                     <div className="grid-md">
-                        <h3>Transaction History:</h3>
+                        <h3>Transactions:</h3>
                         <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
                     </div>
                 )
