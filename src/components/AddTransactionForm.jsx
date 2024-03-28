@@ -28,33 +28,33 @@ const AddTransactionForm = () => {
     return (
       
       <div className='form-wrapper'>
-      <h2>Add Check</h2>
+      <h3>Enter New Check</h3>
       <fetcher.Form 
         method="post"
         className='grid-small' 
         ref={formRef}>
             <div className="expense-inputs">
                 <div className="grid-xs">
-                    <label htmlFor="newCheckTotal">Amount:</label>
+                    <label htmlFor="newCheckTotal" hidden></label>
                     <input 
                         type="number"
                         step='0.01'
                         inputMode='decimal'
                         name='newCheckTotal'
                         id='newCheckTotal'
-                        placeholder='Enter amount'
+                        placeholder='Check Total'
                         ref={focusRef}
                         required />
                 </div>
                 <div className="grid-xs">
-                    <label htmlFor="newCheckTips">TIPS:</label>
+                    <label htmlFor="newCheckTips" hidden></label>
                     <input 
                         type="number"
                         step='0.01'
                         inputMode='decimal'
                         name='newCheckTips'
                         id='newCheckTips'
-                        placeholder='Enter amount'
+                        placeholder='TIPS total'
                         required />
                 </div>
                 <div className="grid-xs">

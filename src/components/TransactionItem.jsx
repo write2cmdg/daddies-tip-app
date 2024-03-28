@@ -4,8 +4,8 @@ import { ArrowsPointingOutIcon } from '@heroicons/react/24/outline'
 
 
 const TransactionItem = ({ transaction }) => {
-    const rawPayment = transaction.payment
-    const checkFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(transaction.check);
+  const rawPayment = transaction.payment
+  const checkFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(transaction.check);
   const tipsFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(transaction.tips);
 
 

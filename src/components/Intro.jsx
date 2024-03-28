@@ -13,7 +13,7 @@ const Intro = () => {
     <div className='intro'>
       <div>
 
-        <div className='container'>
+        <div>
             <img src={splashImg} alt=""/>
         </div>
 

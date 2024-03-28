@@ -18,7 +18,7 @@ export function mainLoader() {
 const Main = () => {
     const { userName } = useLoaderData()
   return (
-      <div className='layout'>
+      <div>
         <Nav userName={userName} />
         <main>
             <Outlet />

@@ -4,6 +4,7 @@ import AddTransactionForm from '../components/AddTransactionForm'
 import { useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import TransactionsTable from '../components/TransactionsTable'
+import ShiftCard from '../components/ShiftCard'
 
 
 //loader
@@ -39,28 +40,34 @@ export async function shiftPageAction({ request }){
     }
 }
 
+
+
 const ShiftPage = () => {
-    const { userName, shifts, transactions } = useLoaderData()
-    let { id } = useParams();
+    const { userName, shifts, transactions } = useLoaderData();
+    const { id } = useParams();
     
+    // Find the shift with the same id as the parameter id
+    const selectedShift = shifts.find(shift => shift.id === id);
+
+    // Filter transactions based on the shiftId
+    const filteredTransactions = transactions ? transactions.filter(transaction => transaction.shiftId === id) : [];
     return (
         <>
+            <div className='budgets'>
+                {/* Render the selected shift if found */}
+                {selectedShift && <ShiftCard key={selectedShift.id} shift={selectedShift} />}
+            </div>
             <AddTransactionForm />
             <div className="grid-md">
-            {
-                transactions && transactions.length > 0 && (
+                {filteredTransactions.length > 0 && (
                     <div className="grid-md">
                         <h3>Transactions:</h3>
-                        <TransactionsTable transactions={transactions.sort((a, b) => b.createdAt - a.createdAt) } />
+                        <TransactionsTable transactions={filteredTransactions.sort((a, b) => b.createdAt - a.createdAt)} />
                     </div>
-                )
-            }
+                )}
             </div>
-
         </>
-  )
-}
-
-
+    );
+};
 
 export default ShiftPage
