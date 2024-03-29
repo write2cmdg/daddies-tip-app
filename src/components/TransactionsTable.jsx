@@ -1,9 +1,11 @@
 import React from 'react'
 import TransactionItem from './TransactionItem'
+import { useLoaderData } from 'react-router-dom'
 
 const TransactionsTable = ({ transactions }) => {
     return (
         <div className='table'>
+           
             <table>
                 <thead>
                     <tr>

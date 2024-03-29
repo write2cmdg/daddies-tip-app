@@ -26,6 +26,7 @@ export const deleteItem = ({key}) => {
     return localStorage.removeItem(key)
 }
 
+
 //format time
 const currentDate = new Date(Date.now());
 const mm = String(currentDate.getMonth() + 1).padStart(2, '0');

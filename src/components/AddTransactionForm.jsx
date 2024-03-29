@@ -24,7 +24,7 @@ const AddTransactionForm = () => {
     }, [isSubmitting])
     let {id} = useParams()
     const shiftId = id
-    console.log("shiftId: ", shiftId)
+    // console.log("shiftId: ", shiftId)
     return (
       
       <div className='form-wrapper'>
