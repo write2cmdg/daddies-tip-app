@@ -81,7 +81,7 @@ return (
     <>
     <div className="form-wrapper">
       <h2><span className='accent'>{shift.shift} </span> <small>{shift.day} {shift.date}</small></h2>
-      <h3><small>Add a transactions to view totals</small></h3> 
+      <h3><small>Add a transactions to view totals...</small></h3> 
     </div>
     <br/>
     </>

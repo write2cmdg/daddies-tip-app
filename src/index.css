@@ -148,7 +148,7 @@ p {
   outline: none;
 }
 
-:where(a, .btn):is(:hover, :focus-visible) {
+:where( .btn):is(:hover, :focus-visible) {
   -webkit-box-shadow: 0 0 0 3px hsl(var(--bkg)), 0 0 0 6px var(--backdrop);
   box-shadow: 0 0 0 3px hsl(var(--bkg)), 0 0 0 6px var(--backdrop);
 }
