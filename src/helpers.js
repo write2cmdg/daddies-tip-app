@@ -37,7 +37,7 @@ const day = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
 
 //create shift
 
-export const createShift = ({ shift, date }) => {
+export const createShift = ({ shift, id }) => {
     const newItem = {
         id: crypto.randomUUID(),
         server: fetchData("userName"),
@@ -48,8 +48,12 @@ export const createShift = ({ shift, date }) => {
     }
 
     const existingShifts = fetchData("shifts") ?? [];
-    return localStorage.setItem("shifts", JSON.stringify([...existingShifts, newItem]))
- }
+    const updatedShifts = [...existingShifts, newItem];
+    localStorage.setItem("shifts", JSON.stringify(updatedShifts));
+
+    // Return the ID of the newly created shift
+    return newItem.id;
+}
 
 
 

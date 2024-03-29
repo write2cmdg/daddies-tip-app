@@ -2,7 +2,7 @@ import React from 'react'
 
 //helper functions
 import { createShift, createTransaction, fetchData, waait } from '../helpers'
-import { useLoaderData } from 'react-router-dom'
+import { redirect, useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
@@ -31,17 +31,22 @@ export async function dashboardAction({ request }){
             throw new Error("There was a problem. Try again")
         }
     }
-    //new shift
-    if (_action === "newShift") {
-        try {
-            createShift({
-                shift: values.newShift,
-            })
-            return toast.success('Shift started')
-        } catch (e) {
-            throw new Error("There was a problem starting your shift")
-        }
+   //new shift
+if (_action === "newShift") {
+    try {
+        // Call createShift and capture the returned ID
+        const newShiftId = createShift({
+            shift: values.newShift
+        });
+
+        // Show success toast
+        toast.success('Shift started');
+        return redirect(`ShiftPage/${newShiftId}`);
+
+    } catch (e) {
+        throw new Error("There was a problem starting your shift")
     }
+}
     //new Transaction
     if (_action === "createTransaction") {
         try {
