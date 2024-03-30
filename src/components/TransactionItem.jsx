@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useFetcher } from 'react-router-dom'
-import { TrashIcon } from '@heroicons/react/24/outline'
+import { TrashIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 
 const TransactionItem = ({ transaction }) => {
   const rawPayment = transaction.payment
@@ -17,8 +17,14 @@ const TransactionItem = ({ transaction }) => {
       <td>
       <fetcher.Form 
         method="post"
-        className='grid-small'>
-            <div className="expense-inputs">
+        className='grid-small'
+        onSubmit={(event) => {
+            if (!confirm("Delete Transaction?")) {
+              event.preventDefault()
+            } 
+          }}>
+           
+             <div className="expense-inputs">
                 <div className="grid-xs">
                   <input type="hidden" name='_action' value="deleteTransaction" />
                   <input type="hidden" name='transactionId' id='transactionId' value={transaction.id} />
@@ -29,6 +35,7 @@ const TransactionItem = ({ transaction }) => {
               </>
             }
           </button>
+
 
                 </div>
             </div>
