@@ -1,5 +1,5 @@
 import React from 'react'
-import { createTransaction, fetchData, waait } from '../helpers'
+import { createTransaction, deleteItem, fetchData, waait } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
 import { useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -36,6 +36,18 @@ export async function shiftPageAction({ request }){
             return toast.success('Check succesfully added')
         } catch (e) {
             throw new Error("There was a problem adding this check")
+        }
+    }
+      //Delete Transaction
+      if (_action === "deleteTransaction") {
+        try {
+            deleteItem({
+                key: "transactions",
+                id: values.transactionId,
+            });
+            return toast.success('Transaction deleted')
+        } catch (e) {
+            throw new Error("There was a problem deleting the transaction")
         }
     }
 }

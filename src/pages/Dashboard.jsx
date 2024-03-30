@@ -1,7 +1,7 @@
 import React from 'react'
 
 //helper functions
-import { createShift, createTransaction, fetchData, waait } from '../helpers'
+import { createShift, createTransaction, deleteItem, fetchData, waait } from '../helpers'
 import { redirect, useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
@@ -17,7 +17,7 @@ export function dashboardLoader() {
 }
 
 //action
-export async function dashboardAction({ request }){
+export async function dashboardAction({ request }) {
     await waait()
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data)
@@ -32,7 +32,7 @@ export async function dashboardAction({ request }){
         }
     }
    //new shift
-if (_action === "newShift") {
+    if (_action === "newShift") {
     try {
         // Call createShift and capture the returned ID
         const newShiftId = createShift({
@@ -46,7 +46,7 @@ if (_action === "newShift") {
     } catch (e) {
         throw new Error("There was a problem starting your shift")
     }
-}
+    }
     //new Transaction
     if (_action === "createTransaction") {
         try {
@@ -60,6 +60,18 @@ if (_action === "newShift") {
             return toast.success('Check succesfully added')
         } catch (e) {
             throw new Error("There was a problem adding this check")
+        }
+    }
+    //Delete Transaction
+    if (_action === "deleteTransaction") {
+        try {
+            deleteItem({
+                key: "transactions",
+                id: values.transactionId,
+            });
+            return toast.success('Transaction deleted')
+        } catch (e) {
+            throw new Error("There was a problem deleting the transaction")
         }
     }
 }
