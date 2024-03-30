@@ -16,7 +16,7 @@ const UserPage = () => {
         <div className='container3'>
             <div className="form-wrapper">
                 <div className="flex-xs">
-                    <p>Click the button to delete User, <br/>shifts and all transactions
+                    <p>Click the button to delete User, <br/>shifts and all transactions.
                     <br/>This action is permanent.</p>
                 </div>
                 <Form className='container3'
