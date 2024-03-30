@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowsPointingOutIcon } from '@heroicons/react/24/outline'
 import { getAllMatchingItems } from '../helpers'
+import { PencilIcon } from '@heroicons/react/24/solid'
 
 const ShiftItem = ({ shift }) => {
   const thisShift = getAllMatchingItems({
@@ -15,7 +16,7 @@ const ShiftItem = ({ shift }) => {
       <td>{shift.day}</td>
       <td>{shift.shift}</td>
       <td>Pending</td>
-      <td> <Link to={`/ShiftPage/${shift.id}`} className='btn'><ArrowsPointingOutIcon height={20} /></Link> </td>
+      <td> <Link to={`/ShiftPage/${shift.id}`} className='btn'><PencilIcon height={20} /></Link> </td>
     </>
   )
 }

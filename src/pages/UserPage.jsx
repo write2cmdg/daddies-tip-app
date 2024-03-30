@@ -12,11 +12,12 @@ import { HomeIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 
 const UserPage = () => {
     return (
+        <>
         <div >
-            <div className="flex-sm">
+            <div className="container form-wrapper">
                 <div className="flex-xs">
-                    <p>Click the button to delete User, shifts and all transactions
-                    This action is permanent.</p>
+                    <p>Click the button to delete User, <br/>shifts and all transactions
+                    <br/>This action is permanent.</p>
                 </div>
                 <Form className='container3'
                     method="post"
@@ -40,6 +41,7 @@ const UserPage = () => {
 
                 </Form>
             </div>
+        </div>
                 <div className="error">
                     <div className='flex-md'>
                         <Link to="/" className='btn btn--dark'>
@@ -47,7 +49,7 @@ const UserPage = () => {
                         </Link>
                     </div>
                 </div>
-        </div>
+                </>
     )
 }
 
