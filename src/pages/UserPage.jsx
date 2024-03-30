@@ -13,8 +13,8 @@ import { HomeIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 const UserPage = () => {
     return (
         <>
-        <div >
-            <div className="container form-wrapper">
+        <div className='container3'>
+            <div className="form-wrapper">
                 <div className="flex-xs">
                     <p>Click the button to delete User, <br/>shifts and all transactions
                     <br/>This action is permanent.</p>
