@@ -5,24 +5,19 @@ import logomark from "../assets/logomark.svg"
 import daddiesLogo from '../assets/daddies-logo-blk-transp.png'
 
 //rrd
-import { Form, NavLink } from 'react-router-dom'
+import { Form, Link, NavLink } from 'react-router-dom'
 
 //library imports
-import { UserMinusIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 
-const Nav = ({userName}) => {
-  return (
-    <nav className='container2'>
-        <NavLink
-        to="/"
-        aria-label='Go to Home'
-        >
-            <div>
-                 <img src={daddiesLogo} alt="" width={300}/> 
-            </div>
-        </NavLink>
-        {/* {
-            userName && (
+const UserPage = () => {
+    return (
+        <div >
+            <div className="flex-sm">
+                <div className="flex-xs">
+                    <p>Click the button to delete User, shifts and all transactions
+                    This action is permanent.</p>
+                </div>
                 <Form className='container3'
                     method="post"
                     action="/logout"
@@ -44,10 +39,16 @@ const Nav = ({userName}) => {
                     </div>
 
                 </Form>
-            )
-        } */}
-    </nav>
-  )
+            </div>
+                <div className="error">
+                    <div className='flex-md'>
+                        <Link to="/" className='btn btn--dark'>
+                            <HomeIcon width={20} />
+                        </Link>
+                    </div>
+                </div>
+        </div>
+    )
 }
 
-export default Nav
+export default UserPage

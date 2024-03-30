@@ -8,6 +8,7 @@ import { logoutAcion } from './actions/logout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import ShiftPage, { shiftPageAction, shiftPageLoader } from './pages/ShiftPage';
+import UserPage from './pages/UserPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
         element:<ShiftPage />,
         loader: shiftPageLoader,
         action: shiftPageAction
+      },
+      {
+        path: "UserPage",
+        element:<UserPage />,
+        // loader: shiftPageLoader,
+        // action: shiftPageAction
       },
       {
         path: "logout",

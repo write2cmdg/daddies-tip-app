@@ -2,7 +2,7 @@ import React from 'react'
 
 //helper functions
 import { createShift, createTransaction, deleteItem, fetchData, waait } from '../helpers'
-import { redirect, useLoaderData } from 'react-router-dom'
+import { Link, redirect, useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
@@ -83,7 +83,7 @@ const Dashboard = () => {
     <>
        {userName ? (
         <div className="dashboard">
-            <h1>Hi, <span className='accent'>{userName}</span></h1>
+            <h1>Hi, <Link to='UserPage' className='accent'>{userName}</Link></h1>
             <div className="grid-sm">
                 {/* Shifts ? () : () */}
                 <div className="grid-lg">

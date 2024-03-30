@@ -17,11 +17,11 @@ export function shiftPageLoader() {
 }
 
 //action
-export async function shiftPageAction({ request }){
+export async function shiftPageAction({ request }) {
     await waait()
     const data = await request.formData()
-    const {_action, ...values} = Object.fromEntries(data)
-    
+    const { _action, ...values } = Object.fromEntries(data)
+
 
     //new Transaction
     if (_action === "createTransaction") {
@@ -39,8 +39,8 @@ export async function shiftPageAction({ request }){
             throw new Error("There was a problem adding this check")
         }
     }
-      //Delete Transaction
-      if (_action === "deleteTransaction") {
+    //Delete Transaction
+    if (_action === "deleteTransaction") {
         try {
             deleteItem({
                 key: "transactions",
@@ -58,7 +58,7 @@ export async function shiftPageAction({ request }){
 const ShiftPage = () => {
     const { userName, shifts, transactions } = useLoaderData();
     const { id } = useParams();
-    
+
     // Find the shift with the same id as the parameter id
     const selectedShift = shifts.find(shift => shift.id === id);
 
@@ -78,13 +78,13 @@ const ShiftPage = () => {
                         <TransactionsTable transactions={filteredTransactions.sort((a, b) => b.createdAt - a.createdAt)} />
                     </div>
                 )}
-                 <div className="error">
-          <div className='flex-md'>
-            <Link to="/" className='btn btn--dark'>
-              <HomeIcon width={20} />
-            </Link>
-          </div>
-        </div>
+                <div className="error">
+                    <div className='flex-md'>
+                        <Link to="/" className='btn btn--dark'>
+                            <HomeIcon width={20} />
+                        </Link>
+                    </div>
+                </div>
             </div>
         </>
     );
