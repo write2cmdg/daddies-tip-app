@@ -71,7 +71,7 @@ return (
         <span className='accent'>{shift.shift} </span> <small>{shift.day} {shift.date}</small> 
         <p><small>Credit Card: <span className='accent'>{formatCurrency(creditCardTotalsThisShift)}</span>, Tips: <span className="accent">{formatCurrency(creditCardTipsThisShift)}</span></small></p>
         <p><small>Cash: <span className="accent">{formatCurrency(cashTotalsThisShift)}</span>, Tips: <span className="accent">{formatCurrency(cashTipsThisShift)}</span> </small></p>
-        <p><small>Gift Card: <span className="accent">{formatCurrency(giftTotalsThisShift)}</span>, Gift Card Tips: <span className="accent">{formatCurrency(giftTipsThisShift)}</span> </small></p>
+        <p><small>Gift Card: <span className="accent">{formatCurrency(giftTotalsThisShift)}</span>, Tips: <span className="accent">{formatCurrency(giftTipsThisShift)}</span> </small></p>
         <p><small>Grand Total: <span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift)}</span>, All Tips: <span className="accent">{formatCurrency(creditCardTipsThisShift + cashTipsThisShift + giftTipsThisShift)}</span></small></p>
       </h2>
     </div>
