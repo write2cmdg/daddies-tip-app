@@ -1,10 +1,11 @@
 import React from 'react'
 import { createTransaction, deleteItem, fetchData, waait } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
-import { useLoaderData, useParams } from 'react-router-dom'
+import { Link, useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import TransactionsTable from '../components/TransactionsTable'
 import ShiftCard from '../components/ShiftCard'
+import { HomeIcon } from '@heroicons/react/24/outline'
 
 
 //loader
@@ -77,6 +78,13 @@ const ShiftPage = () => {
                         <TransactionsTable transactions={filteredTransactions.sort((a, b) => b.createdAt - a.createdAt)} />
                     </div>
                 )}
+                 <div className="error">
+          <div className='flex-md'>
+            <Link to="/" className='btn btn--dark'>
+              <HomeIcon width={20} />
+            </Link>
+          </div>
+        </div>
             </div>
         </>
     );

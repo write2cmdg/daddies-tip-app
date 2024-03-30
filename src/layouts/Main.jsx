@@ -4,10 +4,11 @@ import wave from '../assets/wave.svg'
 
 //helper functions
 import { fetchData } from '../helpers'
-import { Outlet, useLoaderData } from 'react-router-dom'
+import { Link, Outlet, useLoaderData, useNavigate } from 'react-router-dom'
 
 //components
 import Nav from '../components/Nav'
+import { ArrowUturnLeftIcon, HomeIcon } from '@heroicons/react/24/outline'
 
 //loader
 export function mainLoader() {
@@ -23,7 +24,6 @@ const Main = () => {
         <main>
             <Outlet />
         </main>
-        {/* <img src={wave} alt="" /> */}
     </div>
   )
 }

@@ -9,7 +9,6 @@ const TransactionItem = ({ transaction }) => {
   const fetcher = useFetcher()
 
 
- console.log("id: ", transaction.id)
   return (
     <>
       <td>{checkFormatted}</td>
