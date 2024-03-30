@@ -219,8 +219,6 @@ p {
   justify-content: center;
 }
 .container2 {
-  width: 100vw;
-  text-align: center;
   display: flex;
   justify-content: center;
   outline: none;
@@ -307,6 +305,7 @@ p {
 
 /* main layout */
 .layout {
+align-items:center;
   display: -ms-grid;
   display: grid;
   min-height: 100vh;
@@ -325,7 +324,7 @@ main {
   margin-inline: auto;
   display: -ms-grid;
   display: grid;
-  place-items: start;
+  place-items: center;
 }
 
 my-main {
@@ -457,7 +456,7 @@ select {
   display: grid;
   gap: var(--space-md);
   background-color: var(--bkg);
-  padding: var(--space-md);
+  padding: var(--space-xl);
   border-radius: var(--round-lg);
   -webkit-box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);
   box-shadow: 0.25em 0.3em 1em hsl(var(--muted) / 0.2);

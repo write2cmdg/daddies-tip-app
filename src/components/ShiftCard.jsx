@@ -66,7 +66,7 @@ const giftTipsThisShift = transactions.reduce((acc, transaction) => {
 }, 0);
 
 return ( 
-  <div className='form-wrapper'>
+  <div className='form-wrapper container2'>
       <h2>
         <span className='accent'>{shift.shift} </span> <small>{shift.day} {shift.date}</small> 
         <p><small>Credit Card: <span className='accent'>{formatCurrency(creditCardTotalsThisShift)}</span>, Tips: <span className="accent">{formatCurrency(creditCardTipsThisShift)}</span></small></p>
