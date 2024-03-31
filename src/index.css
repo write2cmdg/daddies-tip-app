@@ -124,7 +124,6 @@ p {
 }
 
 /* links and buttons */
-
 :where(a, .btn) {
   --color: hsl(var(--text));
   --backdrop: hsl(var(--accent));
@@ -172,6 +171,11 @@ p {
   max-width: -moz-fit-content;
   max-width: fit-content;
   cursor: pointer;
+}
+
+.btn--width {
+  max-width: 100%;
+  justify-content: center;
 }
 
 :where(.btn):is(:hover, :focus-visible) {

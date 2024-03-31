@@ -73,7 +73,7 @@ const AddTransactionForm = () => {
           </select>
           <input type="hidden" name='_action' value="createTransaction" />
           <input type="hidden" name='shiftId' id='shiftId' value={shiftId} />
-          <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
+          <button type='submit' className='btn btn--dark btn--width' disabled={isSubmitting}>
             {(isSubmitting) ? (
               <p>Processing...</p>
             ) : (

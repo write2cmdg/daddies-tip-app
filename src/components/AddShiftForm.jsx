@@ -36,7 +36,7 @@ const AddShiftForm = () => {
             <option key="Delivery" value="Delivery">Delivery</option>
           </select>
           <input type="hidden" name='_action' value="newShift" />
-          <button type='submit' className='btn btn--dark' disabled={isSubmitting}>
+          <button type='submit' className='btn btn--dark btn--width' disabled={isSubmitting}>
             {(isSubmitting) ? (
               <p>Processing...</p>
             ) : (
