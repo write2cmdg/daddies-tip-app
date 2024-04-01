@@ -24,8 +24,8 @@ export async function shiftPageAction({ request, transactions }) {
     
     //new Transaction
     if (_action === "createTransaction") {
+        // const { transactions } = useLoaderData();
         try {
-            const { transactions } = useLoaderData();
             createTransaction({
                 check: values.newCheckTotal,
                 tips: values.newCheckTips,
@@ -35,7 +35,9 @@ export async function shiftPageAction({ request, transactions }) {
             const updatedTransactions = fetchData("transactions") || []
             localStorage.setItem("transactions", JSON.stringify(updatedTransactions))
             return toast.success('Check succesfully added')
-        } catch (e) {
+        } catch (error) {
+            console.error("Error deleting shift:", error);
+
             throw new Error("There was a problem adding this check")
         }
     }
