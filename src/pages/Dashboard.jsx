@@ -87,6 +87,7 @@ export async function dashboardAction({ request }) {
             throw new Error("There was a problem deleting the shift dash")
         }
     }
+    return null
 }
 
 const Dashboard = () => {

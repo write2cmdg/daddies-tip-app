@@ -89,7 +89,7 @@ return (
              <div className="expense-inputs">
                 <div className="grid-xs">
                   <input type="hidden" name='_action' value="deleteShift" />
-                  <input type="hidden" name='shiftId' id='shiftId' value={shift.shiftId} />
+                  <input type="hidden" name='shiftId' id='shiftId' value={shift.id} />
                   <button type='submit' className='btn btn--card'>
             {
               <>

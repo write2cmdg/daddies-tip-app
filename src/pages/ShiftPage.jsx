@@ -17,15 +17,15 @@ export function shiftPageLoader() {
 
 //action
 
-export async function shiftPageAction({ request }) {
+export async function shiftPageAction({ request, transactions }) {
     await waait()
     const data = await request.formData()
     const { _action, ...values } = Object.fromEntries(data)
     
-    
     //new Transaction
     if (_action === "createTransaction") {
         try {
+            const { transactions } = useLoaderData();
             createTransaction({
                 check: values.newCheckTotal,
                 tips: values.newCheckTips,
@@ -46,6 +46,7 @@ export async function shiftPageAction({ request }) {
                 key: "transactions",
                 id: values.transactionId,
             });
+            console.log('transactionId: ', values.shiftId)
             return toast.success('Transaction deleted')
         } catch (e) {
             throw new Error("There was a problem deleting the transaction")
@@ -56,12 +57,24 @@ export async function shiftPageAction({ request }) {
     if (_action === "deleteShift") {
         
         try {
+        //      // Find all transactions corresponding to the shiftId
+        // const shiftTransactions = transactions.filter((transaction) => transaction.shiftId === values.shiftId);
+        // console.log("transaction", transactions.shiftId ,"shift", values.shiftId )
+
+        // // Delete all transactions corresponding to the shiftId
+        // shiftTransactions.forEach((transaction) => {
+        //     deleteItem({
+        //         key: "transactions",
+        //         id: transaction.shiftId,
+        //     });
+        // });
             deleteItem({
                 key: "shifts",
                 id: values.shiftId,
             }).then(() => {
                 // Deletion successful, now redirect
                 toast.success('Shift deleted')
+                console.log(values.shiftId)
                 return redirect("/")
 
             }).catch((error) => {
