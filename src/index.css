@@ -255,6 +255,20 @@ p {
   gap: 6px;
   margin-bottom: 3ch;
 }
+.container-delete-user {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: first baseline;
+  gap: 6px;
+  margin-bottom: 3ch;
+}
+
+.warning-container {
+  margin-bottom: 3ch;
+}
 
 .container-logout {
   /* width: 100%; */
@@ -699,4 +713,15 @@ table a {
 
 .title-text {
   font-size: 2.75rem;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+}
+
+.header-img {
+  position: fixed;
+  top: 0px;
 }

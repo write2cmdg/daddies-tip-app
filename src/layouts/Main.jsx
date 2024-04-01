@@ -1,6 +1,7 @@
 import React from 'react'
 //assets
 import footerImg from '../assets/footer-img.png'
+import headerImg from '../assets/header-img.png'
 
 //helper functions
 import { fetchData } from '../helpers'
@@ -20,11 +21,17 @@ const Main = () => {
     const { userName } = useLoaderData()
   return (
       <div>
+        <div className="header-img">
+          <img src={headerImg} alt="" />
+        </div>
         <Nav userName={userName} />
+
         <main>
             <Outlet />
         </main>
-        <img src={footerImg} alt="" />
+        <div className="footer">
+          <img src={footerImg} alt="" />
+        </div>
     </div>
   )
 }

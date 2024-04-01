@@ -13,13 +13,15 @@ import { HomeIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 const UserPage = () => {
     return (
         <>
-        <div className='container3'>
+        <div className='container-delete-user'>
             <div className="form-wrapper">
                 <div className="flex-xs">
-                    <p>Click the button to delete User, <br/>shifts and all transactions.
-                    <br/>This action is permanent.</p>
+                    <div className="warning-container">
+                        <p>Click the button to delete User, <br/>shifts and all transactions.
+                        <br/>This action is permanent.</p>
+                    </div>
                 </div>
-                <Form className='container3'
+                <Form
                     method="post"
                     action="/logout"
                     onSubmit={(event) => {
