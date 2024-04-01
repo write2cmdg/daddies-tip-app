@@ -16,7 +16,7 @@ const ShiftItem = ({ shift }) => {
       <td>{shift.day}</td>
       <td>{shift.shift}</td>
       <td>Pending</td>
-      <td> <Link to={`/ShiftPage/${shift.id}`} className='btn'><PencilIcon height={20} /></Link> </td>
+      <td> <Link to={`/ShiftPage/${shift.id}`} className='btn btn--home'><PencilIcon height={20} /></Link> </td>
     </>
   )
 }
