@@ -1,6 +1,6 @@
 import React from 'react'
 //assets
-import wave from '../assets/wave.svg'
+import footerImg from '../assets/footer-img.png'
 
 //helper functions
 import { fetchData } from '../helpers'
@@ -24,6 +24,7 @@ const Main = () => {
         <main>
             <Outlet />
         </main>
+        <img src={footerImg} alt="" />
     </div>
   )
 }

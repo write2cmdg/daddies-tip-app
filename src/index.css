@@ -696,3 +696,7 @@ table a {
 .three-fr {
   grid-column: span 3;
 }
+
+.title-text {
+  font-size: 2.75rem;
+}

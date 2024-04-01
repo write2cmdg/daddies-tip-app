@@ -83,13 +83,12 @@ const Dashboard = () => {
     <>
        {userName ? (
         <div className="dashboard">
-            <h1 className='h2'>Hi, <Link to='UserPage' className='accent'>{userName}</Link></h1>
+            <h1>Hi, <Link to='UserPage' className='accent'>{userName}</Link></h1>
             <div className="grid-sm">
                 {/* Shifts ? () : () */}
                 <div className="grid-lg">
                     <div className="flex-lg">
                         <AddShiftForm />
-
                     </div>
                 </div>
                         <div>
