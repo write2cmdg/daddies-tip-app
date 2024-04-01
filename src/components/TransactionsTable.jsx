@@ -10,7 +10,7 @@ const TransactionsTable = ({ transactions }) => {
                 <thead>
                     <tr>
                         {
-                            [ "Total", "Tip", "Payment", "" ].map((i, index) => (
+                            [ "Total", "Tips", "Payment", "" ].map((i, index) => (
                                 <th key={index}>{i}</th>
                             ))
                         }

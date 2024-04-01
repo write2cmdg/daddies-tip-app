@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useFetcher } from 'react-router-dom'
-import { TrashIcon, UserMinusIcon } from '@heroicons/react/24/outline'
+import { BanknotesIcon, CreditCardIcon, GiftIcon, TrashIcon, UserMinusIcon } from '@heroicons/react/24/outline'
 
 const TransactionItem = ({ transaction }) => {
   const rawPayment = transaction.payment
@@ -13,7 +13,14 @@ const TransactionItem = ({ transaction }) => {
     <>
       <td>{checkFormatted}</td>
       <td>{tipsFormatted}</td>
-      <td>{rawPayment.includes('Card') ? rawPayment.replace('Card', ' Card') : rawPayment}</td>
+      {/* <td>{rawPayment.includes('Card') ? rawPayment.replace('Card', ' Card') : rawPayment}</td> */}
+      <td>
+  {rawPayment === "GiftCard" && <GiftIcon width={20} />}
+  {rawPayment === "Cash" && <BanknotesIcon width={20} />}
+  {rawPayment === "CreditCard" && <CreditCardIcon width={20} />}
+  {/* {rawPayment !== "GiftCard" && rawPayment !== "Cash" && <BanknotesIcon width={20} />} */}
+</td>
+
       <td>
       <fetcher.Form 
         method="post"
