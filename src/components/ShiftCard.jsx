@@ -68,15 +68,21 @@ const giftTipsThisShift = transactions.reduce((acc, transaction) => {
 
 return ( 
   <div className='form-wrapper'>
-        <div className="container3">
-          <h2 className='accent mb0'>{shift.shift}</h2>
-          <h6><small>{shift.day} {shift.date}</small></h6>
-          {/* <form action="submit"> */}
+
+        <div className="grid-container">
+          <div className='two-fr'>
+            <h2 className='accent mb0'>{shift.shift}</h2>
+          </div>
+          <div className='two-fr'>
+            <h6><small>{shift.day} {shift.date}</small></h6>
+          </div>
+          <div>
             <button className='btn btn--card'>
               <TrashIcon width={20} />
             </button>
-          {/* </form> */}
+          </div>
         </div>
+
         <div className="grid-container">
 
           <div className='two-fr'>
