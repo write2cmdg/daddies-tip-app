@@ -675,7 +675,7 @@ table a {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 4 columns */
   grid-template-rows: repeat(4, auto);
-  gap: 16px;
+  gap: 8px;
   text-align: left;
   align-items: baseline;
   white-space: nowrap;
