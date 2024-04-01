@@ -21,13 +21,27 @@ export const getAllMatchingItems = ({ category, key, value }) => {
     return data.filter((item) => item[key] === value)
 }
 
-// //delete item
-// export const deleteItem = ({key}) => {
-//     return localStorage.removeItem(key)
-// }
 
 //delete transaction 
-export const deleteItem = ({key, id}) => {
+export const deleteItem = ({ key, id }) => {
+    return new Promise((resolve, reject) => {
+        try {
+            const existingData = fetchData(key);
+            if (id) {
+                const newData = existingData.filter((item) => item.id !== id);
+                localStorage.setItem(key, JSON.stringify(newData));
+            } else {
+                localStorage.removeItem(key);
+            }
+            resolve(); // Resolve the promise if deletion is successful
+        } catch (error) {
+            reject(error); // Reject the promise if an error occurs
+        }
+    });
+};
+
+//delete shift 
+export const deleteShiftItem = ({key, id}) => {
     const existingData = fetchData(key);
     if (id) {
         const newData = existingData.filter((item) => item.id !== id);

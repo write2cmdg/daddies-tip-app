@@ -1,12 +1,11 @@
 import React from 'react'
 import { createTransaction, deleteItem, fetchData, waait } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
-import { Link, useLoaderData, useParams } from 'react-router-dom'
+import { Link, redirect, useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import TransactionsTable from '../components/TransactionsTable'
 import ShiftCard from '../components/ShiftCard'
 import { HomeIcon } from '@heroicons/react/24/outline'
-
 
 //loader
 export function shiftPageLoader() {
@@ -17,12 +16,13 @@ export function shiftPageLoader() {
 }
 
 //action
+
 export async function shiftPageAction({ request }) {
     await waait()
     const data = await request.formData()
     const { _action, ...values } = Object.fromEntries(data)
-
-
+    
+    
     //new Transaction
     if (_action === "createTransaction") {
         try {
@@ -49,18 +49,46 @@ export async function shiftPageAction({ request }) {
             return toast.success('Transaction deleted')
         } catch (e) {
             throw new Error("There was a problem deleting the transaction")
+            return null
+        }   
+        return null
+    }
+    if (_action === "deleteShift") {
+        
+        try {
+            deleteItem({
+                key: "shifts",
+                id: values.shiftId,
+            }).then(() => {
+                // Deletion successful, now redirect
+                toast.success('Shift deleted')
+                return redirect("/")
+
+            }).catch((error) => {
+                // Handle error from deletion
+                console.error("Error deleting shift:", error);
+                toast.error("There was a problem deleting the shift");
+                return null
+            });
+        } catch (e) {
+            // Handle synchronous errors
+            console.error("Error deleting shift:", e);
+            toast.error("There was a problem deleting the shift");
         }
     }
+    return redirect("/")
+    
 }
+
 
 
 
 const ShiftPage = () => {
     const { userName, shifts, transactions } = useLoaderData();
     const { id } = useParams();
-
+    
     // Find the shift with the same id as the parameter id
-    const selectedShift = shifts.find(shift => shift.id === id);
+    const selectedShift = shifts && shifts.find(shift => shift.id === id);
 
     // Filter transactions based on the shiftId
     const filteredTransactions = transactions ? transactions.filter(transaction => transaction.shiftId === id) : [];
@@ -80,8 +108,8 @@ const ShiftPage = () => {
                 )}
                 <div className="error">
                     <div className='flex-md'>
-                        <Link to="/" className='btn btn--dark'>
-                            <HomeIcon width={20} />
+                        <Link to="/" className='btn btn--home'>
+                            <HomeIcon width={26} />
                         </Link>
                     </div>
                 </div>

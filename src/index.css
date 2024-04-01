@@ -212,6 +212,13 @@ p {
   --color: hsl(var(--warning));
   background-color: transparent;
 }
+
+:where(.btn--home) {
+  --backdrop: hsl(var(--warning) / 0.1);
+  border: none;
+  --color: 0 0 0;
+  background-color: transparent;
+}
 :where(.btn--card) {
   --backdrop: hsl(var(--warning) / 0.1);
   border: none;
@@ -494,8 +501,8 @@ select {
   max-width: 800px;
   position: relative;
   display: -ms-grid;
-  /* display: grid; */
-  gap: var(--space-lg);
+  display: grid;
+  gap: 2ch;
   background-color: var(--bkg);
   padding: var(--space-xl);
   border-radius: var(--round-lg);

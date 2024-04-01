@@ -1,8 +1,8 @@
 import React from 'react'
 
 //helper functions
-import { createShift, createTransaction, deleteItem, fetchData, waait } from '../helpers'
-import { Link, redirect, useLoaderData } from 'react-router-dom'
+import { createShift, createTransaction, deleteItem, deleteShiftItem, fetchData, waait } from '../helpers'
+import { Link, Navigate, redirect, useLoaderData } from 'react-router-dom'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddShiftForm from '../components/AddShiftForm'
@@ -72,6 +72,19 @@ export async function dashboardAction({ request }) {
             return toast.success('Transaction deleted')
         } catch (e) {
             throw new Error("There was a problem deleting the transaction")
+        }
+    }
+    //Delete shift
+    if (_action === "deleteShift") {
+        try {
+            deleteItem({
+                key: "shifts",
+                id: values.ShiftId,
+            });
+            toast.success('Shift deleted')
+            return null
+        } catch (e) {
+            throw new Error("There was a problem deleting the shift dash")
         }
     }
 }

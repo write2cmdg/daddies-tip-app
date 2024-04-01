@@ -1,11 +1,11 @@
 import React from 'react'
-import { shiftPageLoader } from '../pages/ShiftPage'
-import { useParams } from 'react-router-dom'
+import { shiftPageLoader, shiftPageAction } from '../pages/ShiftPage'
+import { useFetcher, useParams } from 'react-router-dom'
 import { TrashIcon } from '@heroicons/react/24/outline'
-
 
 const ShiftCard = ({shift}) => {
   const { id } = useParams()
+  const fetcher = useFetcher()
 
   const { transactions } = shiftPageLoader()
 
@@ -77,9 +77,31 @@ return (
             <h6><small>{shift.day} {shift.date}</small></h6>
           </div>
           <div>
-            <button className='btn btn--card'>
-              <TrashIcon width={20} />
-            </button>
+            <fetcher.Form 
+        method="post"
+        className='grid-small'
+        onSubmit={(event) => {
+            if (!confirm("Delete Shift?")) {
+              event.preventDefault()
+            } 
+          }}>
+           
+             <div className="expense-inputs">
+                <div className="grid-xs">
+                  <input type="hidden" name='_action' value="deleteShift" />
+                  <input type="hidden" name='shiftId' id='shiftId' value={shift.shiftId} />
+                  <button type='submit' className='btn btn--card'>
+            {
+              <>
+                <TrashIcon width={20} />
+              </>
+            }
+          </button>
+
+
+                </div>
+            </div>
+      </fetcher.Form>
           </div>
         </div>
 
