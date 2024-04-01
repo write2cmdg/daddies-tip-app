@@ -680,7 +680,19 @@ table a {
   align-items: baseline;
   white-space: nowrap;
 }
+.grid-container-card-title {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 4 columns */
+  grid-template-rows: repeat(4, auto);
+  gap: 8px;
+  text-align: left;
+  align-items: baseline;
+  white-space: nowrap;
+}
 
 .two-fr {
   grid-column: span 2;
+}
+.three-fr {
+  grid-column: span 3;
 }

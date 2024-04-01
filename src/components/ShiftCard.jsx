@@ -69,8 +69,8 @@ const giftTipsThisShift = transactions.reduce((acc, transaction) => {
 return ( 
   <div className='form-wrapper'>
 
-        <div className="grid-container">
-          <div className='two-fr'>
+        <div className="grid-container-card-title">
+          <div className='three-fr'>
             <h2 className='accent mb0'>{shift.shift}</h2>
           </div>
           <div className='two-fr'>
