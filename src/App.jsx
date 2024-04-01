@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="App">
       <RouterProvider router={router} />
-      <ToastContainer />
+      <ToastContainer autoClose={800} />
     </div>
   )
 }

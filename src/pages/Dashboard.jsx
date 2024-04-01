@@ -83,7 +83,7 @@ const Dashboard = () => {
     <>
        {userName ? (
         <div className="dashboard">
-            <h1>Hi, <Link to='UserPage' className='accent'>{userName}</Link></h1>
+            <h1 className='h2'>Hi, <Link to='UserPage' className='accent'>{userName}</Link></h1>
             <div className="grid-sm">
                 {/* Shifts ? () : () */}
                 <div className="grid-lg">
@@ -103,7 +103,7 @@ const Dashboard = () => {
                                 {
                                 shifts && shifts.length > 0 && (
                                     <div className="grid-md">
-                                        <h2>Shift History</h2>
+                                        <h2>Shift History:</h2>
                                         <Table shifts={shifts.sort((a, b) => b.createdAt - a.createdAt) } />
                                     </div>
                                 )

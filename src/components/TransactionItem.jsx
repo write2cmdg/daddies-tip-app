@@ -28,7 +28,7 @@ const TransactionItem = ({ transaction }) => {
                 <div className="grid-xs">
                   <input type="hidden" name='_action' value="deleteTransaction" />
                   <input type="hidden" name='transactionId' id='transactionId' value={transaction.id} />
-                  <button type='submit' className='btn btn--warning'>
+                  <button type='submit' className='btn btn--trash'>
             {
               <>
                 <TrashIcon width={20} />

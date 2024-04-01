@@ -86,7 +86,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
-  line-height: var(--lh-1);
+  line-height: var(--lh-1-4);
 }
 
 h1,
@@ -101,12 +101,12 @@ h2,
 
 h3,
 .h3 {
-  font-size: var(--fs-400);
+  font-size: var(--fs-200);
+  
 }
 
 small {
   font-size: var(--fs-200);
-  line-height: var(--lh-1);
 }
 
 p {
@@ -203,6 +203,21 @@ p {
   --backdrop: hsl(var(--warning) / 0.1);
   border: 2px solid hsl(var(--warning));
   --color: hsl(var(--warning));
+  background-color: 
+}
+
+:where(.btn--trash) {
+  --backdrop: hsl(var(--warning) / 0.1);
+  border: none;
+  --color: hsl(var(--warning));
+  background-color: transparent;
+}
+:where(.btn--card) {
+  --backdrop: hsl(var(--warning) / 0.1);
+  border: none;
+  --color: hsl(var(--warning));
+  background-color: transparent;
+  padding-bottom: 0px;
 }
 
 :where(.btn--warning):is(:hover, :focus-visible) {
@@ -224,16 +239,23 @@ p {
 }
 .container2 {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   outline: none;
 }
 
 .container3 {
   width: 100%;
-  text-align: center;
+  /* text-align: left; */
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  /* justify-content: flex-end; */
+  align-items: first baseline;
+  gap: 6px;
+  margin-bottom: 3ch;
 }
+
 .container-logout {
   /* width: 100%; */
   display: inline-block;
@@ -366,7 +388,7 @@ nav {
 
 /* forms */
 label {
-  font-size: var(--fs-300);
+  font-size: var(--fs-400);
   font-weight: bold;
 }
 
@@ -458,7 +480,7 @@ select {
   max-width: 800px;
   position: relative;
   display: -ms-grid;
-  display: grid;
+  /* display: grid; */
   gap: var(--space-lg);
   background-color: var(--bkg);
   padding: var(--space-xl);
@@ -640,4 +662,25 @@ table a {
 /* toast */
 .Toastify__toast-body {
   font-size: var(--fs-300);
+}
+
+.mb0 {
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+  vertical-align: baseline;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
+  grid-template-rows: repeat(4, auto);
+  gap: 16px;
+  text-align: left;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.two-fr {
+  grid-column: span 2;
 }
