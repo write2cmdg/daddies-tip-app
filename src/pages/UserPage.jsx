@@ -46,8 +46,8 @@ const UserPage = () => {
         </div>
                 <div className="error">
                     <div className='flex-md'>
-                        <Link to="/" className='btn btn--dark'>
-                            <HomeIcon width={20} />
+                        <Link to="/" className='btn btn--home'>
+                            <HomeIcon width={30} />
                         </Link>
                     </div>
                 </div>

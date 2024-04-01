@@ -124,7 +124,7 @@ const ShiftPage = () => {
                 <div className="error">
                     <div className='flex-md'>
                         <Link to="/" className='btn btn--home'>
-                            <HomeIcon width={26} />
+                            <HomeIcon width={30} />
                         </Link>
                     </div>
                 </div>
