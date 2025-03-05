@@ -37,7 +37,8 @@ const AddTransactionForm = () => {
           <div className="grid-xs">
             <label htmlFor="newCheckTotal">Add a new check:</label>
             <input
-              type="text"
+              type="tel"
+              inputMode="decimal"
               name="newCheckTotal"
               id="newCheckTotal"
               placeholder="Enter Check Total"
@@ -52,7 +53,8 @@ const AddTransactionForm = () => {
               Enter TIPS total:
             </label>
             <input
-              type="text"
+              type="tel"
+              inputMode="decimal"
               name="newCheckTips"
               id="newCheckTips"
               placeholder="Enter TIPS total"
