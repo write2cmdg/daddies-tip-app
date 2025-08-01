@@ -10,10 +10,9 @@ const shiftAbbreviations = {
   Delivery: 'GO',
 }
 
-// Helper to format date as MM/DD
 const formatDate = (dateString) => {
   const date = new Date(dateString)
-  if (isNaN(date)) return dateString // fallback if invalid date
+  if (isNaN(date)) return dateString
   const mm = String(date.getMonth() + 1).padStart(2, '0')
   const dd = String(date.getDate()).padStart(2, '0')
   return `${mm}/${dd}`
@@ -31,9 +30,8 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
   );
 
   const handleChange = (e) => {
-    const input = e.target.value.replace(/\D/g, ''); // only digits
+    const input = e.target.value.replace(/\D/g, '');
     setRawInput(input);
-
     const floatValue = parseFloat((parseInt(input || "0", 10) / 100).toFixed(2));
     onDueTipsChange(shift.id, floatValue);
   };
@@ -42,14 +40,20 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
     ? (parseInt(rawInput, 10) / 100).toFixed(2)
     : "";
 
+  const cellStyle = {
+    fontSize: '0.75rem',     // Smaller text
+    padding: '0.25rem 0.4rem',
+    lineHeight: '1.1',
+    whiteSpace: 'nowrap'
+  };
+
   return (
     <>
-      <td>{formatDate(shift.date)}</td>
-      <td>{shift.day}</td>
-      <td>{shiftAbbreviations[shift.shift] || shift.shift}</td>
+      <td style={cellStyle}>{formatDate(shift.date)}</td>
+      <td style={cellStyle}>{shift.day}</td>
+      <td style={cellStyle}>{shiftAbbreviations[shift.shift] || shift.shift}</td>
 
-      {/* Due Tips Input - smaller */}
-      <td>
+      <td style={cellStyle}>
         <input
           type="text"
           inputMode="numeric"
@@ -57,37 +61,37 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '4rem',          // smaller width for 999.99
-            fontSize: '0.9rem',     // slightly smaller font
+            width: '5rem',              // wider for 999.99
+            fontSize: '0.8rem',
             textAlign: 'right',
             fontVariantNumeric: 'tabular-nums',
-            MozAppearance: 'textfield' // Firefox - remove spinner
+            MozAppearance: 'textfield'
           }}
         />
       </td>
 
-      {/* Toggle Button - smaller */}
-      <td>
+      <td style={cellStyle}>
         <button
           onClick={() => onTipsStatusToggle(shift.id)}
           style={{
             backgroundColor: tipsStatus === 'due' ? '#f87171' : '#34d399',
             color: 'white',
             fontWeight: 'bold',
-            padding: '0.15rem 0.5rem', // reduced padding
-            fontSize: '0.85rem',       // smaller font
-            borderRadius: '0.3rem',
-            minWidth: '3.5rem',
+            padding: '0.15rem 0.4rem',
+            fontSize: '0.75rem',
+            borderRadius: '0.25rem',
+            minWidth: '3.2rem',
             textAlign: 'center',
+            whiteSpace: 'nowrap'
           }}
         >
           {tipsStatus === 'due' ? 'DUE' : 'Paid'}
         </button>
       </td>
 
-      <td>
+      <td style={cellStyle}>
         <Link to={`/ShiftPage/${shift.id}`} className='btn btn--home'>
-          <PencilIcon height={20} />
+          <PencilIcon height={16} />
         </Link>
       </td>
     </>
