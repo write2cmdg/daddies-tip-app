@@ -3,6 +3,22 @@ import { Link } from 'react-router-dom'
 import { PencilIcon } from '@heroicons/react/24/solid'
 import { getAllMatchingItems } from '../helpers'
 
+const shiftAbbreviations = {
+  Dinner: 'D',
+  Lunch: 'L',
+  Brunch: 'B',
+  Delivery: 'GO',
+}
+
+// Helper to format date as MM/DD
+const formatDate = (dateString) => {
+  const date = new Date(dateString)
+  if (isNaN(date)) return dateString // fallback if invalid date
+  const mm = String(date.getMonth() + 1).padStart(2, '0')
+  const dd = String(date.getDate()).padStart(2, '0')
+  return `${mm}/${dd}`
+}
+
 const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusToggle }) => {
   const thisShift = getAllMatchingItems({
     category: "shifts",
@@ -28,11 +44,11 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
 
   return (
     <>
-      <td>{shift.date}</td>
+      <td>{formatDate(shift.date)}</td>
       <td>{shift.day}</td>
-      <td>{shift.shift}</td>
+      <td>{shiftAbbreviations[shift.shift] || shift.shift}</td>
 
-      {/* Due Tips Input */}
+      {/* Due Tips Input - smaller */}
       <td>
         <input
           type="text"
@@ -41,15 +57,16 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '4rem',       // adjusted width here
+            width: '4rem',          // smaller width for 999.99
+            fontSize: '0.9rem',     // slightly smaller font
             textAlign: 'right',
             fontVariantNumeric: 'tabular-nums',
-            MozAppearance: 'textfield' // Firefox spinner removal
+            MozAppearance: 'textfield' // Firefox - remove spinner
           }}
         />
       </td>
 
-      {/* Toggle Button */}
+      {/* Toggle Button - smaller */}
       <td>
         <button
           onClick={() => onTipsStatusToggle(shift.id)}
@@ -57,15 +74,17 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
             backgroundColor: tipsStatus === 'due' ? '#f87171' : '#34d399',
             color: 'white',
             fontWeight: 'bold',
-            padding: '0.25rem 0.75rem',
-            borderRadius: '0.375rem',
+            padding: '0.15rem 0.5rem', // reduced padding
+            fontSize: '0.85rem',       // smaller font
+            borderRadius: '0.3rem',
+            minWidth: '3.5rem',
+            textAlign: 'center',
           }}
         >
           {tipsStatus === 'due' ? 'DUE' : 'Paid'}
         </button>
       </td>
 
-      {/* Edit Link */}
       <td>
         <Link to={`/ShiftPage/${shift.id}`} className='btn btn--home'>
           <PencilIcon height={20} />
