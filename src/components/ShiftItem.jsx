@@ -9,14 +9,15 @@ const shiftAbbreviations = {
   Brunch: 'B',
   Delivery: 'GO',
 }
-
 const formatDate = (dateString) => {
   const date = new Date(dateString)
   if (isNaN(date)) return dateString
   const mm = String(date.getMonth() + 1).padStart(2, '0')
   const dd = String(date.getDate()).padStart(2, '0')
-  return `${mm}/${dd}`
+  const yy = String(date.getFullYear()).slice(-2)
+  return `${mm}/${dd}/${yy}`
 }
+
 
 const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusToggle }) => {
   const thisShift = getAllMatchingItems({
