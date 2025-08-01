@@ -64,8 +64,7 @@ const AddTransactionForm = () => {
               onChange={(e) => formatCurrencyInput(e.target.value, setCheckTips)}
               required
             />
-          </div>
-          <div className="grid-xs">
+
             <label htmlFor="newPaymentType">Select one:</label>
             <select
               value={selected}
