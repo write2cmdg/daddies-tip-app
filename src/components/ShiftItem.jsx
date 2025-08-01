@@ -32,7 +32,7 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
       <td>{shift.day}</td>
       <td>{shift.shift}</td>
 
-      {/* Due Tips Input - smaller */}
+      {/* Due Tips Input */}
       <td>
         <input
           type="text"
@@ -41,16 +41,15 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '4rem',          // smaller width for 999.99
-            fontSize: '0.9rem',     // slightly smaller font
+            width: '4rem',       // adjusted width here
             textAlign: 'right',
             fontVariantNumeric: 'tabular-nums',
-            MozAppearance: 'textfield' // Firefox - remove spinner
+            MozAppearance: 'textfield' // Firefox spinner removal
           }}
         />
       </td>
 
-      {/* Toggle Button - smaller */}
+      {/* Toggle Button */}
       <td>
         <button
           onClick={() => onTipsStatusToggle(shift.id)}
@@ -58,17 +57,15 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
             backgroundColor: tipsStatus === 'due' ? '#f87171' : '#34d399',
             color: 'white',
             fontWeight: 'bold',
-            padding: '0.15rem 0.5rem', // reduced padding
-            fontSize: '0.85rem',       // smaller font
-            borderRadius: '0.3rem',
-            minWidth: '3.5rem',
-            textAlign: 'center',
+            padding: '0.25rem 0.75rem',
+            borderRadius: '0.375rem',
           }}
         >
           {tipsStatus === 'due' ? 'DUE' : 'Paid'}
         </button>
       </td>
 
+      {/* Edit Link */}
       <td>
         <Link to={`/ShiftPage/${shift.id}`} className='btn btn--home'>
           <PencilIcon height={20} />
