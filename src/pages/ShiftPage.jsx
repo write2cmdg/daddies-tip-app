@@ -110,10 +110,10 @@ const ShiftPage = () => {
     return (
         <>
             <div className='budgets'>
+            <AddTransactionForm />
                 {/* Render the selected shift if found */}
                 {selectedShift && <ShiftCard key={selectedShift.id} shift={selectedShift} />}
             </div>
-            <AddTransactionForm />
             <div className="grid-md">
                 {filteredTransactions.length > 0 && (
                     <div className="grid-md">
