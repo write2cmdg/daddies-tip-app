@@ -47,12 +47,14 @@ const AddTransactionForm = () => {
               ref={focusRef}
               required
             />
-          </div>
-          <div className="grid-xs">
+        
             <label htmlFor="newCheckTips" hidden>
               Enter TIPS total:
             </label>
             <input
+              style={{
+                maxHeight: '4rem'
+              }}
               type="tel"
               inputMode="decimal"
               name="newCheckTips"
