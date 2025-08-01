@@ -61,9 +61,9 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '4rem',              // wider for 999.99
+            width: '4.25rem',              // wider for 999.99
             fontSize: '0.65rem',
-            textAlign: 'right',
+            textAlign: 'left',
             fontVariantNumeric: 'tabular-nums',
             MozAppearance: 'textfield'
           }}

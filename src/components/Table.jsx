@@ -66,14 +66,14 @@ const Table = ({ shifts }) => {
 
   return (
     <div className='table'>
-      <div style={{ marginBottom: '1rem', fontWeight: 'bold' }}>
+      <div style={{ marginBottom: '0.75rem', fontWeight: 'normal' }}>
         Total Due Tips:  <span style={{ color: 'red' }}> ${totalDueTips}</span>
       </div>
 
       <table>
         <thead>
-          <tr>
-            {["Date", "Day", "Shift", "Tips", "Status", ""].map((i, index) => (
+          <tr style={{fontSize: '1rem'}}>
+            {["Date", "Day", "Shift", "Tips", "Status", "Edit"].map((i, index) => (
               <th key={index}>{i}</th>
             ))}
           </tr>
