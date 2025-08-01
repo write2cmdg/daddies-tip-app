@@ -42,9 +42,10 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
 
   const cellStyle = {
     fontSize: '0.65rem',     // Smaller text
-    padding: '0.15rem 0.2rem',
-    lineHeight: '1.1',
-    whiteSpace: 'nowrap'
+    padding: '0.1rem 0.1rem',
+    lineHeight: '1',
+    whiteSpace: 'nowrap',
+    fontWeight: 'bold'
   };
 
   return (
@@ -76,7 +77,7 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           style={{
             backgroundColor: tipsStatus === 'due' ? '#f87171' : '#34d399',
             color: 'white',
-            fontWeight: 'bold',
+            fontWeight: 'bolder',
             padding: '0.10rem 0.4rem',
             fontSize: '0.65rem',
             borderRadius: '0.15rem',
