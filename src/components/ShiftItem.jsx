@@ -41,8 +41,8 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
     : "";
 
   const cellStyle = {
-    fontSize: '0.75rem',     // Smaller text
-    padding: '0.25rem 0.4rem',
+    fontSize: '0.65rem',     // Smaller text
+    padding: '0.15rem 0.2rem',
     lineHeight: '1.1',
     whiteSpace: 'nowrap'
   };
@@ -61,8 +61,8 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '5rem',              // wider for 999.99
-            fontSize: '0.8rem',
+            width: '4rem',              // wider for 999.99
+            fontSize: '0.65rem',
             textAlign: 'right',
             fontVariantNumeric: 'tabular-nums',
             MozAppearance: 'textfield'
@@ -77,10 +77,10 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
             backgroundColor: tipsStatus === 'due' ? '#f87171' : '#34d399',
             color: 'white',
             fontWeight: 'bold',
-            padding: '0.15rem 0.4rem',
-            fontSize: '0.75rem',
-            borderRadius: '0.25rem',
-            minWidth: '3.2rem',
+            padding: '0.10rem 0.4rem',
+            fontSize: '0.65rem',
+            borderRadius: '0.15rem',
+            minWidth: '2rem',
             textAlign: 'center',
             whiteSpace: 'nowrap'
           }}
@@ -91,7 +91,7 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
 
       <td style={cellStyle}>
         <Link to={`/ShiftPage/${shift.id}`} className='btn btn--home'>
-          <PencilIcon height={16} />
+          <PencilIcon height={12} />
         </Link>
       </td>
     </>
