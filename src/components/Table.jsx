@@ -66,8 +66,8 @@ const Table = ({ shifts }) => {
 
   return (
     <div className='table'>
-      <div style={{ marginBottom: '0.75rem', fontWeight: 'normal' }}>
-        Total Due Tips:  <span style={{ color: 'red' }}> ${totalDueTips}</span>
+      <div style={{ marginBottom: '0.75rem', fontWeight: 'bold' }}>
+        Total Due Tips:  <span style={{ color: 'red', fontWeight: 'bold' }}> ${totalDueTips}</span>
       </div>
 
       <table>
