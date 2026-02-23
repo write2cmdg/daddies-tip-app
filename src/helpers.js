@@ -33,9 +33,9 @@ export const deleteItem = ({ key, id }) => {
             } else {
                 localStorage.removeItem(key);
             }
-            resolve(); // Resolve the promise if deletion is successful
+            resolve();
         } catch (error) {
-            reject(error); // Reject the promise if an error occurs
+            reject(error);
         }
     });
 };
@@ -59,8 +59,8 @@ const yyyy = String(currentDate.getFullYear()).slice(-2);
 const formattedDate = `${mm}-${dd}-${yyyy}`;
 const day = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
 
-//create shift
 
+//create shift
 export const createShift = ({ shift, id }) => {
     const newItem = {
         id: crypto.randomUUID(),
@@ -75,25 +75,27 @@ export const createShift = ({ shift, id }) => {
     const updatedShifts = [...existingShifts, newItem];
     localStorage.setItem("shifts", JSON.stringify(updatedShifts));
 
-    // Return the ID of the newly created shift
     return newItem.id;
 }
 
 
 
 //create transaction
-
 export const createTransaction = ({ check, tips, payment, shiftId }) => {
 
-    const checkNum = Number(check) || 0;
-    const fee = payment === "CreditCard" ? (checkNum * 0.03).toFixed(2) : "0.00";
+    const safeCheck = check ? check : "0.00";
+    const checkNum = Number(safeCheck) || 0;
+
+    const fee = payment === "CreditCard"
+        ? (checkNum * 0.03).toFixed(2)
+        : "0.00";
 
     const newItem = {
         id: crypto.randomUUID(),
         server: fetchData("userName"),
         date: formattedDate,
-        check: check,
-        tips: tips,
+        check: safeCheck,
+        tips: tips ? tips : "0.00",
         fee: fee,
         payment: payment,
         createdAt: Date.now(),
@@ -102,4 +104,34 @@ export const createTransaction = ({ check, tips, payment, shiftId }) => {
 
     const existingTransactions = fetchData("transactions") ?? [];
     return localStorage.setItem("transactions", JSON.stringify([...existingTransactions, newItem]))
- }
+}
+
+
+
+//update transaction (check + tips) and keep fee correct
+export const updateTransaction = ({ transactionId, check, tips }) => {
+
+    const existingTransactions = fetchData("transactions") ?? [];
+
+    const updatedTransactions = existingTransactions.map((t) => {
+        if (t.id !== transactionId) return t;
+
+        const nextCheck = check ? check : t.check;
+        const nextTips = tips ? tips : "0.00";
+
+        const checkNum = Number(nextCheck) || 0;
+
+        const nextFee = t.payment === "CreditCard"
+            ? (checkNum * 0.03).toFixed(2)
+            : "0.00";
+
+        return {
+            ...t,
+            check: nextCheck,
+            tips: nextTips,
+            fee: nextFee,
+        };
+    });
+
+    return localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
+};

@@ -1,5 +1,5 @@
 import React from 'react'
-import { createTransaction, deleteItem, fetchData, waait } from '../helpers'
+import { createTransaction, deleteItem, fetchData, waait, updateTransaction } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
 import { Link, redirect, useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -16,7 +16,6 @@ export function shiftPageLoader() {
 }
 
 //action
-
 export async function shiftPageAction({ request, transactions }) {
     await waait()
     const data = await request.formData()
@@ -24,7 +23,6 @@ export async function shiftPageAction({ request, transactions }) {
     
     //new Transaction
     if (_action === "createTransaction") {
-        // const { transactions } = useLoaderData();
         try {
             createTransaction({
                 check: values.newCheckTotal,
@@ -37,10 +35,24 @@ export async function shiftPageAction({ request, transactions }) {
             return toast.success('Check succesfully added')
         } catch (error) {
             console.error("Error deleting shift:", error);
-
             throw new Error("There was a problem adding this check")
         }
     }
+
+    //update Transaction (check + tips)
+    if (_action === "updateTransaction") {
+        try {
+            updateTransaction({
+                transactionId: values.transactionId,
+                check: values.newCheck,
+                tips: values.newTips,
+            });
+            return toast.success('Transaction updated')
+        } catch (e) {
+            throw new Error("There was a problem updating the transaction")
+        }
+    }
+
     //Delete Transaction
     if (_action === "deleteTransaction") {
         try {
@@ -52,51 +64,31 @@ export async function shiftPageAction({ request, transactions }) {
             return toast.success('Transaction deleted')
         } catch (e) {
             throw new Error("There was a problem deleting the transaction")
-            return null
         }   
-        return null
     }
-    if (_action === "deleteShift") {
-        
-        try {
-        //      // Find all transactions corresponding to the shiftId
-        // const shiftTransactions = transactions.filter((transaction) => transaction.shiftId === values.shiftId);
-        // console.log("transaction", transactions.shiftId ,"shift", values.shiftId )
 
-        // // Delete all transactions corresponding to the shiftId
-        // shiftTransactions.forEach((transaction) => {
-        //     deleteItem({
-        //         key: "transactions",
-        //         id: transaction.shiftId,
-        //     });
-        // });
+    if (_action === "deleteShift") {
+        try {
             deleteItem({
                 key: "shifts",
                 id: values.shiftId,
             }).then(() => {
-                // Deletion successful, now redirect
                 toast.success('Shift deleted')
                 console.log(values.shiftId)
                 return redirect("/")
-
             }).catch((error) => {
-                // Handle error from deletion
                 console.error("Error deleting shift:", error);
                 toast.error("There was a problem deleting the shift");
                 return null
             });
         } catch (e) {
-            // Handle synchronous errors
             console.error("Error deleting shift:", e);
             toast.error("There was a problem deleting the shift");
         }
     }
+
     return redirect("/")
-    
 }
-
-
-
 
 const ShiftPage = () => {
     const { userName, shifts, transactions } = useLoaderData();

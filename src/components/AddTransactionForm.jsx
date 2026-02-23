@@ -69,13 +69,13 @@ const AddTransactionForm = () => {
               }}
               type="tel"
               inputMode="decimal"
-              name="newCheckTips"
               id="newCheckTips"
               placeholder="Enter TIPS total"
               value={checkTips}
               onChange={(e) => formatCurrencyInput(e.target.value, setCheckTips)}
-              required
             />
+
+            <input type="hidden" name="newCheckTips" value={checkTips ? checkTips : "0.00"} />
 
             <label htmlFor="newPaymentType">Select one:</label>
             <select
