@@ -13,15 +13,6 @@ const ShiftCard = ({shift}) => {
   const [isEditingDate, setIsEditingDate] = useState(false)
   const dateInputRef = useRef(null)
 
-  // local display (so UI updates even if loader data doesn't revalidate)
-  const [displayDay, setDisplayDay] = useState(shift.day)
-  const [displayDate, setDisplayDate] = useState(shift.date)
-
-  useEffect(() => {
-    setDisplayDay(shift.day)
-    setDisplayDate(shift.date)
-  }, [shift.day, shift.date])
-
   const formatCurrency = (amount) => {
     return amount.toLocaleString('en-US', {
         style: 'currency',
@@ -39,20 +30,6 @@ const ShiftCard = ({shift}) => {
     return `${fullYear}-${mm}-${dd}`;
   };
 
-  const isoToDisplay = (iso) => {
-    // iso: "YYYY-MM-DD"
-    const dt = new Date(`${iso}T12:00:00`);
-    if (isNaN(dt)) return { day: displayDay, date: displayDate };
-
-    const mm = String(dt.getMonth() + 1).padStart(2, '0');
-    const dd = String(dt.getDate()).padStart(2, '0');
-    const yy = String(dt.getFullYear()).slice(-2);
-    const nextDate = `${mm}-${dd}-${yy}`;
-
-    const nextDay = dt.toLocaleDateString('en-US', { weekday: 'short' });
-    return { day: nextDay, date: nextDate };
-  };
-
   const [dateIso, setDateIso] = useState(toIso(shift.date))
 
   useEffect(() => {
@@ -64,14 +41,6 @@ const ShiftCard = ({shift}) => {
       setTimeout(() => dateInputRef.current?.focus(), 0)
     }
   }, [isEditingDate])
-
-  const submitShiftDate = (nextIso) => {
-    const fd = new FormData()
-    fd.append("_action", "updateShiftDate")
-    fd.append("shiftId", shift.id)
-    fd.append("newShiftDate", nextIso)
-    dateFetcher.submit(fd, { method: "post" })
-  }
 
   if (transactions) {
 
@@ -152,41 +121,38 @@ const ShiftCard = ({shift}) => {
                     onClick={() => setIsEditingDate(true)}
                     title="Click to edit day/date"
                   >
-                    {displayDay} {displayDate}
+                    {shift.day} {shift.date}
                   </span>
                 ) : (
-                  <input
-                    ref={dateInputRef}
-                    type="date"
-                    value={dateIso}
-                    onChange={(e) => {
-                      const nextIso = e.target.value
-                      setDateIso(nextIso)
+                  <dateFetcher.Form method="post">
+                    <input type="hidden" name="_action" value="updateShiftDate" />
+                    <input type="hidden" name="shiftId" value={shift.id} />
 
-                      // update UI immediately
-                      const next = isoToDisplay(nextIso)
-                      setDisplayDay(next.day)
-                      setDisplayDate(next.date)
-
-                      // persist
-                      submitShiftDate(nextIso)
-
-                      // close editor
-                      setIsEditingDate(false)
-                    }}
-                    onBlur={() => setIsEditingDate(false)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === "Escape") {
-                        e.currentTarget.blur()
-                        setIsEditingDate(false)
-                      }
-                    }}
-                    style={{
-                      width: "9.5rem",
-                      fontSize: ".85rem",
-                      padding: ".15rem .35rem"
-                    }}
-                  />
+                    <input
+                      ref={dateInputRef}
+                      type="date"
+                      name="newShiftDate"
+                      value={dateIso}
+                      onChange={(e) => {
+                        const nextIso = e.target.value
+                        setDateIso(nextIso)
+                        // submit immediately, no save button
+                        dateFetcher.submit(e.currentTarget.form, { method: "post" })
+                      }}
+                      onBlur={() => setIsEditingDate(false)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === "Escape") {
+                          e.currentTarget.blur()
+                          setIsEditingDate(false)
+                        }
+                      }}
+                      style={{
+                        width: "9.5rem",
+                        fontSize: ".85rem",
+                        padding: ".15rem .35rem"
+                      }}
+                    />
+                  </dateFetcher.Form>
                 )}
               </small>
             </h6>
