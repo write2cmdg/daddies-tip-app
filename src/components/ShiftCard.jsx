@@ -139,7 +139,7 @@ return (
 
           <div className='two-fr'>
             <h6>
-              <small>Fee (3%):</small>
+              <small>CC Fee (3%):</small>
             </h6>
           </div>
           <div>
@@ -147,6 +147,8 @@ return (
               <small><span className="accent">{formatCurrency(creditCardFeesThisShift)}</span></small>
             </h6>
           </div>
+          <div></div>
+          <div></div>
 
           <div className='two-fr'>
             <h6>
@@ -213,6 +215,8 @@ return (
             <small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift + creditCardFeesThisShift)}</span></small>
           </h6>
         </div>
+        <div></div>
+        <div></div>
 
         <div>
           <h6>
