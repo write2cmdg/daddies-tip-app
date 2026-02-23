@@ -691,16 +691,20 @@ table a {
   vertical-align: baseline;
 }
 
-
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 4 columns */
-  grid-template-rows: repeat(4, auto);
+  grid-template-columns: 2fr 1fr 2fr 1fr;
   gap: 8px;
   text-align: left;
   align-items: baseline;
   white-space: nowrap;
 }
+
+/* Right-align value columns */
+.grid-container > :nth-child(2n) {
+  text-align: right;
+}
+
 .grid-container-card-title {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 4 columns */
