@@ -76,9 +76,9 @@ const creditCardFeesThisShift = transactions.reduce((acc, transaction) => {
 
 const totalWithFee =
   creditCardTotalsThisShift +
-  cashTotalsThisShift +
-  giftTotalsThisShift +
   creditCardFeesThisShift;
+
+  
 
 return ( 
   <div className='form-wrapper'>
