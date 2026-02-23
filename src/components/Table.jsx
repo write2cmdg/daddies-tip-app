@@ -17,10 +17,21 @@ const Table = ({ shifts }) => {
     return {};
   });
 
-  // Initialize state for new shifts not yet in shiftStates
+  // Initialize state for new shifts AND prune removed shifts
   useEffect(() => {
     setShiftStates((prev) => {
       const updated = { ...prev };
+
+      const currentIds = new Set(shifts.map((s) => s.id));
+
+      // Remove shiftStates entries that no longer exist
+      Object.keys(updated).forEach((shiftId) => {
+        if (!currentIds.has(shiftId)) {
+          delete updated[shiftId];
+        }
+      });
+
+      // Add missing entries for new shifts
       shifts.forEach((shift) => {
         if (!updated[shift.id]) {
           updated[shift.id] = {
@@ -29,6 +40,7 @@ const Table = ({ shifts }) => {
           };
         }
       });
+
       return updated;
     });
   }, [shifts]);
@@ -61,17 +73,19 @@ const Table = ({ shifts }) => {
     }));
   };
 
-  // Sum due tips using cent math (avoids floating point drift)
-  const totalDueTipsCents = Object.values(shiftStates)
-    .filter((s) => s.tipsStatus === 'due')
-    .reduce((acc, s) => acc + Math.round((Number(s.dueTips) || 0) * 100), 0);
+  // Sum due tips using ONLY current shifts + cent math
+  const totalDueTipsCents = shifts.reduce((acc, shift) => {
+    const state = shiftStates[shift.id];
+    if (!state || state.tipsStatus !== 'due') return acc;
+    return acc + Math.round((Number(state.dueTips) || 0) * 100);
+  }, 0);
 
   const totalDueTips = (totalDueTipsCents / 100).toFixed(2);
 
   return (
     <div className='table'>
       <div style={{ marginBottom: '0.75rem', fontWeight: 'bold' }}>
-        Total Due Tips: <span style={{ color: 'red', fontWeight: 'bold' }}> ${totalDueTips}</span>
+        Total Due Tips:  <span style={{ color: 'red', fontWeight: 'bold' }}> ${totalDueTips}</span>
       </div>
 
       <table>
