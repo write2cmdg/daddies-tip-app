@@ -60,6 +60,14 @@ const formattedDate = `${mm}-${dd}-${yyyy}`;
 const day = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
 
 
+// fee calc using cent math (per-transaction rounding)
+const calcFee = (check) => {
+    const checkCents = Math.round((Number(check) || 0) * 100);
+    const feeCents = Math.round(checkCents * 3 / 100);
+    return (feeCents / 100).toFixed(2);
+};
+
+
 //create shift
 export const createShift = ({ shift, id }) => {
     const newItem = {
@@ -84,10 +92,9 @@ export const createShift = ({ shift, id }) => {
 export const createTransaction = ({ check, tips, payment, shiftId }) => {
 
     const safeCheck = check ? check : "0.00";
-    const checkNum = Number(safeCheck) || 0;
 
     const fee = payment === "CreditCard"
-        ? (checkNum * 0.03).toFixed(2)
+        ? calcFee(safeCheck)
         : "0.00";
 
     const newItem = {
@@ -119,10 +126,8 @@ export const updateTransaction = ({ transactionId, check, tips }) => {
         const nextCheck = check ? check : t.check;
         const nextTips = tips ? tips : "0.00";
 
-        const checkNum = Number(nextCheck) || 0;
-
         const nextFee = t.payment === "CreditCard"
-            ? (checkNum * 0.03).toFixed(2)
+            ? calcFee(nextCheck)
             : "0.00";
 
         return {

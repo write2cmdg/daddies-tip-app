@@ -68,7 +68,7 @@ const giftTipsThisShift = transactions.reduce((acc, transaction) => {
 
 const creditCardFeesThisShift = transactions.reduce((acc, transaction) => {
   if (transaction.shiftId === id && transaction.payment === "CreditCard") {
-    const fee = transaction.fee != null ? +transaction.fee : (+transaction.check * 0.03);
+    const fee = transaction.fee != null ? +transaction.fee : 0;
     return acc + fee;
   }
   return acc;
