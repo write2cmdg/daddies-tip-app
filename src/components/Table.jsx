@@ -40,11 +40,13 @@ const Table = ({ shifts }) => {
 
   // Handlers
   const onDueTipsChange = (shiftId, value) => {
+    const dueTipsNum = Number(value) || 0;
+
     setShiftStates((prev) => ({
       ...prev,
       [shiftId]: {
         ...prev[shiftId],
-        dueTips: value,
+        dueTips: dueTipsNum,
       },
     }));
   };
@@ -59,15 +61,17 @@ const Table = ({ shifts }) => {
     }));
   };
 
-  const totalDueTips = Object.values(shiftStates)
+  // Sum due tips using cent math (avoids floating point drift)
+  const totalDueTipsCents = Object.values(shiftStates)
     .filter((s) => s.tipsStatus === 'due')
-    .reduce((acc, s) => acc + s.dueTips, 0)
-    .toFixed(2);
+    .reduce((acc, s) => acc + Math.round((Number(s.dueTips) || 0) * 100), 0);
+
+  const totalDueTips = (totalDueTipsCents / 100).toFixed(2);
 
   return (
     <div className='table'>
       <div style={{ marginBottom: '0.75rem', fontWeight: 'bold' }}>
-        Total Due Tips:  <span style={{ color: 'red', fontWeight: 'bold' }}> ${totalDueTips}</span>
+        Total Due Tips: <span style={{ color: 'red', fontWeight: 'bold' }}> ${totalDueTips}</span>
       </div>
 
       <table>
