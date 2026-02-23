@@ -41,6 +41,7 @@ const AddTransactionForm = () => {
     ? (Number(checkTotal) + Number(feePreview)).toFixed(2)
     : "";
 
+    
   return (
     <div className="form-wrapper">
       <fetcher.Form method="post" className="grid-small" ref={formRef}>
