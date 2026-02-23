@@ -66,6 +66,14 @@ const giftTipsThisShift = transactions.reduce((acc, transaction) => {
     }
 }, 0);
 
+const creditCardFeesThisShift = transactions.reduce((acc, transaction) => {
+  if (transaction.shiftId === id && transaction.payment === "CreditCard") {
+    const fee = transaction.fee != null ? +transaction.fee : (+transaction.check * 0.03);
+    return acc + fee;
+  }
+  return acc;
+}, 0);
+
 return ( 
   <div className='form-wrapper'>
 
@@ -131,6 +139,17 @@ return (
 
           <div className='two-fr'>
             <h6>
+              <small>CC Fee (3%):</small>
+            </h6>
+          </div>
+          <div>
+            <h6>
+              <small><span className="accent">{formatCurrency(creditCardFeesThisShift)}</span></small>
+            </h6>
+          </div>
+
+          <div className='two-fr'>
+            <h6>
               <small>Cash: </small>
             </h6>
           </div>
@@ -181,6 +200,17 @@ return (
         <div>
           <h6>
             <small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift)}</span></small>
+          </h6>
+        </div>
+
+        <div className='two-fr'>
+          <h6>
+            <small>Total + CC Fee:</small>
+          </h6>
+        </div>
+        <div>
+          <h6>
+            <small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift + creditCardFeesThisShift)}</span></small>
           </h6>
         </div>
 

@@ -83,8 +83,10 @@ export const createShift = ({ shift, id }) => {
 
 //create transaction
 
-
 export const createTransaction = ({ check, tips, payment, shiftId }) => {
+
+    const checkNum = Number(check) || 0;
+    const fee = payment === "CreditCard" ? (checkNum * 0.03).toFixed(2) : "0.00";
 
     const newItem = {
         id: crypto.randomUUID(),
@@ -92,6 +94,7 @@ export const createTransaction = ({ check, tips, payment, shiftId }) => {
         date: formattedDate,
         check: check,
         tips: tips,
+        fee: fee,
         payment: payment,
         createdAt: Date.now(),
         shiftId: shiftId,
