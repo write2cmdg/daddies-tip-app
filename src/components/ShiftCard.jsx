@@ -78,8 +78,6 @@ const totalWithFee =
   creditCardTotalsThisShift +
   creditCardFeesThisShift;
 
-  
-
 return ( 
   <div className='form-wrapper'>
 
@@ -115,7 +113,7 @@ return (
 
         <div className="grid-container">
 
-          <div className='two-fr'>
+          <div>
             <h6><small>Credit Card:</small></h6>
           </div>
           <div>
@@ -129,8 +127,7 @@ return (
             <h6><small><span className="accent">{formatCurrency(creditCardTipsThisShift)}</span></small></h6>
           </div>
 
-          {/* CC Fee + Total With Fee on same row */}
-          <div className='two-fr'>
+          <div>
             <h6><small>CC Fee (3%):</small></h6>
           </div>
           <div>
@@ -144,7 +141,7 @@ return (
             <h6><small><span className="accent">{formatCurrency(totalWithFee)}</span></small></h6>
           </div>
 
-          <div className='two-fr'>
+          <div>
             <h6><small>Cash: </small></h6>
           </div>
           <div>
@@ -158,7 +155,7 @@ return (
             <h6><small><span className="accent">{formatCurrency(cashTipsThisShift)}</span></small></h6>
           </div>
 
-          <div className='two-fr'>
+          <div>
             <h6><small>Gift Card: </small></h6>
           </div>
           <div>
@@ -172,7 +169,7 @@ return (
             <h6><small><span className="accent">{formatCurrency(giftTipsThisShift)}</span></small></h6>
           </div>  
 
-          <div className='two-fr'>
+          <div>
             <h6><small>Grand Total:</small></h6>
           </div>
           <div>
