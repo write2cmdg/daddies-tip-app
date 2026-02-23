@@ -139,7 +139,7 @@ return (
 
           <div className='two-fr'>
             <h6>
-              <small>CC Fee (3%):</small>
+              <small>Fee (3%):</small>
             </h6>
           </div>
           <div>
