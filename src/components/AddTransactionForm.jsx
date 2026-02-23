@@ -62,7 +62,6 @@ const AddTransactionForm = () => {
             {checkTotal && (
               <div style={{ display: "grid", gap: ".25rem" }}>
                 <small>3% fee: ${feePreview}</small>
-                <small>Check + fee: ${totalWithFeePreview}</small>
               </div>
             )}
 
