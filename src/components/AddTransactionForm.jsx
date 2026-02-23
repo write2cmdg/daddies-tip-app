@@ -41,7 +41,7 @@ const AddTransactionForm = () => {
     ? (Number(checkTotal) + Number(feePreview)).toFixed(2)
     : "";
 
-    
+
   return (
     <div className="form-wrapper">
       <fetcher.Form method="post" className="grid-small" ref={formRef}>
@@ -65,6 +65,7 @@ const AddTransactionForm = () => {
                 <p>3% fee: ${feePreview}<p/>
               </div>
             )}
+            
 
             <label htmlFor="newCheckTips" hidden>
               Enter TIPS total:
