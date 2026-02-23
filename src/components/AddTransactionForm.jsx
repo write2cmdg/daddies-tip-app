@@ -6,19 +6,25 @@ const AddTransactionForm = () => {
   const fetcher = useFetcher();
   const formRef = useRef();
   const focusRef = useRef();
+  const prevSubmittingRef = useRef(false);
+
   const [selected, setSelected] = useState("CreditCard");
   const [checkTotal, setCheckTotal] = useState("");
   const [checkTips, setCheckTips] = useState("");
   const isSubmitting = fetcher.state === "submitting";
 
   useEffect(() => {
-    if (!isSubmitting) {
+    const wasSubmitting = prevSubmittingRef.current;
+
+    if (wasSubmitting && !isSubmitting) {
       formRef.current.reset();
       focusRef.current.focus();
       setSelected("CreditCard");
       setCheckTotal("");
       setCheckTips("");
     }
+
+    prevSubmittingRef.current = isSubmitting;
   }, [isSubmitting]);
 
   let { id } = useParams();
@@ -64,9 +70,7 @@ const AddTransactionForm = () => {
               Enter TIPS total:
             </label>
             <input
-              style={{
-                maxHeight: '4rem'
-              }}
+              style={{ maxHeight: '4rem' }}
               type="tel"
               inputMode="decimal"
               id="newCheckTips"
@@ -85,7 +89,7 @@ const AddTransactionForm = () => {
               required
               onChange={(e) => setSelected(e.target.value)}
             >
-              <option ref={focusRef} key="CreditCard" value="CreditCard">
+              <option key="CreditCard" value="CreditCard">
                 Credit Card
               </option>
               <option key="Cash" value="Cash">
@@ -95,8 +99,10 @@ const AddTransactionForm = () => {
                 Gift Card
               </option>
             </select>
+
             <input type="hidden" name="_action" value="createTransaction" />
             <input type="hidden" name="shiftId" id="shiftId" value={shiftId} />
+
             <button type="submit" className="btn btn--dark btn--width" disabled={isSubmitting}>
               {isSubmitting ? <p>Processing...</p> : <>
                 <span>Add Check</span>

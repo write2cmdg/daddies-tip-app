@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useFetcher } from 'react-router-dom'
 import { BanknotesIcon, CreditCardIcon, GiftIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 const TransactionItem = ({ transaction }) => {
   const rawPayment = transaction.payment
-  const fetcher = useFetcher()
+
+  const updateFetcher = useFetcher()
+  const deleteFetcher = useFetcher()
 
   const [checkEdit, setCheckEdit] = useState(String(transaction.check ?? "0.00"));
   const [tipsEdit, setTipsEdit] = useState(String(transaction.tips ?? "0.00"));
+
+  const timerRef = useRef(null);
 
   useEffect(() => {
     setCheckEdit(String(transaction.check ?? "0.00"));
@@ -23,9 +27,18 @@ const TransactionItem = ({ transaction }) => {
     setter((parseInt(inputValue, 10) / 100).toFixed(2));
   };
 
-  const isSaving =
-    fetcher.state === "submitting" &&
-    fetcher.formData?.get("_action") === "updateTransaction";
+  const submitUpdate = (nextCheck, nextTips) => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+
+    timerRef.current = setTimeout(() => {
+      const fd = new FormData();
+      fd.append("_action", "updateTransaction");
+      fd.append("transactionId", transaction.id);
+      fd.append("newCheck", nextCheck ? nextCheck : "0.00");
+      fd.append("newTips", nextTips ? nextTips : "0.00");
+      updateFetcher.submit(fd, { method: "post" });
+    }, 350);
+  };
 
   return (
     <>
@@ -34,33 +47,33 @@ const TransactionItem = ({ transaction }) => {
           type="tel"
           inputMode="decimal"
           value={checkEdit}
-          onChange={(e) => formatCurrencyInput(e.target.value, setCheckEdit)}
+          onChange={(e) => {
+            const raw = e.target.value;
+            formatCurrencyInput(raw, (next) => {
+              setCheckEdit(next);
+              submitUpdate(next, tipsEdit);
+            });
+          }}
           placeholder="0.00"
           style={{ maxWidth: "7rem" }}
         />
       </td>
 
       <td>
-        <div style={{ display: "flex", gap: ".5rem", alignItems: "center" }}>
-          <input
-            type="tel"
-            inputMode="decimal"
-            value={tipsEdit}
-            onChange={(e) => formatCurrencyInput(e.target.value, setTipsEdit)}
-            placeholder="0.00"
-            style={{ maxWidth: "7rem" }}
-          />
-
-          <fetcher.Form method="post" className="grid-small">
-            <input type="hidden" name="_action" value="updateTransaction" />
-            <input type="hidden" name="transactionId" value={transaction.id} />
-            <input type="hidden" name="newCheck" value={checkEdit ? checkEdit : "0.00"} />
-            <input type="hidden" name="newTips" value={tipsEdit ? tipsEdit : "0.00"} />
-            <button type="submit" className="btn btn--card" disabled={isSaving}>
-              {isSaving ? "..." : "Save"}
-            </button>
-          </fetcher.Form>
-        </div>
+        <input
+          type="tel"
+          inputMode="decimal"
+          value={tipsEdit}
+          onChange={(e) => {
+            const raw = e.target.value;
+            formatCurrencyInput(raw, (next) => {
+              setTipsEdit(next);
+              submitUpdate(checkEdit, next);
+            });
+          }}
+          placeholder="0.00"
+          style={{ maxWidth: "7rem" }}
+        />
       </td>
 
       <td>
@@ -70,14 +83,14 @@ const TransactionItem = ({ transaction }) => {
       </td>
 
       <td>
-        <fetcher.Form 
+        <deleteFetcher.Form
           method="post"
           className='grid-small'
           onSubmit={(event) => {
-              if (!confirm("Delete Transaction?")) {
-                event.preventDefault()
-              } 
-            }}>
+            if (!confirm("Delete Transaction?")) {
+              event.preventDefault()
+            }
+          }}>
           <div className="expense-inputs">
             <div className="grid-xs">
               <input type="hidden" name='_action' value="deleteTransaction" />
@@ -87,7 +100,7 @@ const TransactionItem = ({ transaction }) => {
               </button>
             </div>
           </div>
-        </fetcher.Form>
+        </deleteFetcher.Form>
       </td>
     </>
   )
