@@ -1,5 +1,5 @@
 import React from 'react'
-import { createTransaction, deleteItem, fetchData, waait, updateTransaction } from '../helpers'
+import { createTransaction, deleteItem, fetchData, waait, updateTransaction, updateShiftDate } from '../helpers'
 import AddTransactionForm from '../components/AddTransactionForm'
 import { Link, redirect, useLoaderData, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -50,6 +50,19 @@ export async function shiftPageAction({ request, transactions }) {
             return toast.success('Transaction updated')
         } catch (e) {
             throw new Error("There was a problem updating the transaction")
+        }
+    }
+
+    //update Shift date
+    if (_action === "updateShiftDate") {
+        try {
+            updateShiftDate({
+                shiftId: values.shiftId,
+                isoDate: values.newShiftDate,
+            });
+            return null
+        } catch (e) {
+            throw new Error("There was a problem updating the shift date")
         }
     }
 

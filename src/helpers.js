@@ -140,3 +140,30 @@ export const updateTransaction = ({ transactionId, check, tips }) => {
 
     return localStorage.setItem("transactions", JSON.stringify(updatedTransactions));
 };
+
+
+//update shift date (expects ISO date: "YYYY-MM-DD")
+export const updateShiftDate = ({ shiftId, isoDate }) => {
+    const existingShifts = fetchData("shifts") ?? [];
+
+    const dt = new Date(isoDate);
+    if (isNaN(dt)) return;
+
+    const mm = String(dt.getMonth() + 1).padStart(2, '0');
+    const dd = String(dt.getDate()).padStart(2, '0');
+    const yy = String(dt.getFullYear()).slice(-2);
+    const nextDate = `${mm}-${dd}-${yy}`;
+
+    const nextDay = dt.toLocaleDateString('en-US', { weekday: 'short' });
+
+    const updatedShifts = existingShifts.map((s) => {
+        if (s.id !== shiftId) return s;
+        return {
+            ...s,
+            date: nextDate,
+            day: nextDay,
+        };
+    });
+
+    localStorage.setItem("shifts", JSON.stringify(updatedShifts));
+};
