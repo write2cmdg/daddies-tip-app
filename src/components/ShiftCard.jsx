@@ -13,6 +13,15 @@ const ShiftCard = ({shift}) => {
   const [isEditingDate, setIsEditingDate] = useState(false)
   const dateInputRef = useRef(null)
 
+  // local display (so UI updates even if loader data doesn't revalidate)
+  const [displayDay, setDisplayDay] = useState(shift.day)
+  const [displayDate, setDisplayDate] = useState(shift.date)
+
+  useEffect(() => {
+    setDisplayDay(shift.day)
+    setDisplayDate(shift.date)
+  }, [shift.day, shift.date])
+
   const formatCurrency = (amount) => {
     return amount.toLocaleString('en-US', {
         style: 'currency',
@@ -28,6 +37,20 @@ const ShiftCard = ({shift}) => {
     const y = Number(yy);
     const fullYear = y >= 70 ? `19${yy}` : `20${yy}`;
     return `${fullYear}-${mm}-${dd}`;
+  };
+
+  const isoToDisplay = (iso) => {
+    // iso: "YYYY-MM-DD"
+    const dt = new Date(`${iso}T12:00:00`);
+    if (isNaN(dt)) return { day: displayDay, date: displayDate };
+
+    const mm = String(dt.getMonth() + 1).padStart(2, '0');
+    const dd = String(dt.getDate()).padStart(2, '0');
+    const yy = String(dt.getFullYear()).slice(-2);
+    const nextDate = `${mm}-${dd}-${yy}`;
+
+    const nextDay = dt.toLocaleDateString('en-US', { weekday: 'short' });
+    return { day: nextDay, date: nextDate };
   };
 
   const [dateIso, setDateIso] = useState(toIso(shift.date))
@@ -127,9 +150,9 @@ const ShiftCard = ({shift}) => {
                   <span
                     style={{ textDecoration: "underline", cursor: "pointer" }}
                     onClick={() => setIsEditingDate(true)}
-                    title="Click to edit date"
+                    title="Click to edit day/date"
                   >
-                    {shift.day} {shift.date}
+                    {displayDay} {displayDate}
                   </span>
                 ) : (
                   <input
@@ -137,9 +160,19 @@ const ShiftCard = ({shift}) => {
                     type="date"
                     value={dateIso}
                     onChange={(e) => {
-                      const next = e.target.value
-                      setDateIso(next)
-                      submitShiftDate(next)
+                      const nextIso = e.target.value
+                      setDateIso(nextIso)
+
+                      // update UI immediately
+                      const next = isoToDisplay(nextIso)
+                      setDisplayDay(next.day)
+                      setDisplayDate(next.date)
+
+                      // persist
+                      submitShiftDate(nextIso)
+
+                      // close editor
+                      setIsEditingDate(false)
                     }}
                     onBlur={() => setIsEditingDate(false)}
                     onKeyDown={(e) => {
