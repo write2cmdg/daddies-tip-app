@@ -40,6 +40,13 @@ const TransactionItem = ({ transaction }) => {
     }, 350);
   };
 
+  const inputStyle = {
+    maxWidth: "6rem",
+    fontSize: ".85rem",
+    padding: ".25rem .4rem",
+    textAlign: "right"
+  };
+
   return (
     <>
       <td>
@@ -55,7 +62,7 @@ const TransactionItem = ({ transaction }) => {
             });
           }}
           placeholder="0.00"
-          style={{ maxWidth: "7rem" }}
+          style={inputStyle}
         />
       </td>
 
@@ -72,7 +79,7 @@ const TransactionItem = ({ transaction }) => {
             });
           }}
           placeholder="0.00"
-          style={{ maxWidth: "7rem" }}
+          style={inputStyle}
         />
       </td>
 
@@ -94,7 +101,7 @@ const TransactionItem = ({ transaction }) => {
           <div className="expense-inputs">
             <div className="grid-xs">
               <input type="hidden" name='_action' value="deleteTransaction" />
-              <input type="hidden" name='transactionId' id='transactionId' value={transaction.id} />
+              <input type="hidden" name='transactionId' value={transaction.id} />
               <button type='submit' className='btn btn--trash'>
                 <TrashIcon width={20} />
               </button>
