@@ -74,6 +74,12 @@ const creditCardFeesThisShift = transactions.reduce((acc, transaction) => {
   return acc;
 }, 0);
 
+const totalWithFee =
+  creditCardTotalsThisShift +
+  cashTotalsThisShift +
+  giftTotalsThisShift +
+  creditCardFeesThisShift;
+
 return ( 
   <div className='form-wrapper'>
 
@@ -99,14 +105,8 @@ return (
                   <input type="hidden" name='_action' value="deleteShift" />
                   <input type="hidden" name='shiftId' id='shiftId' value={shift.id} />
                   <button type='submit' className='btn btn--card'>
-            {
-              <>
-                <TrashIcon width={20} />
-              </>
-            }
-          </button>
-
-
+                    <TrashIcon width={20} />
+                  </button>
                 </div>
             </div>
       </fetcher.Form>
@@ -116,118 +116,76 @@ return (
         <div className="grid-container">
 
           <div className='two-fr'>
-            <h6>
-              <small>Credit Card:</small>
-            </h6>
+            <h6><small>Credit Card:</small></h6>
           </div>
           <div>
-            <h6>
-              <small><span className='accent'>{formatCurrency(creditCardTotalsThisShift)}</span></small>
-            </h6>
+            <h6><small><span className='accent'>{formatCurrency(creditCardTotalsThisShift)}</span></small></h6>
           </div>
 
           <div>
-            <h6>
-              <small>Tips: </small>
-            </h6>
+            <h6><small>Tips: </small></h6>
           </div>
           <div>
-            <h6>
-              <small><span className="accent">{formatCurrency(creditCardTipsThisShift)}</span></small>
-            </h6>
+            <h6><small><span className="accent">{formatCurrency(creditCardTipsThisShift)}</span></small></h6>
+          </div>
+
+          {/* CC Fee + Total With Fee on same row */}
+          <div className='two-fr'>
+            <h6><small>CC Fee (3%):</small></h6>
+          </div>
+          <div>
+            <h6><small><span className="accent">{formatCurrency(creditCardFeesThisShift)}</span></small></h6>
+          </div>
+
+          <div>
+            <h6><small>Total + Fee:</small></h6>
+          </div>
+          <div>
+            <h6><small><span className="accent">{formatCurrency(totalWithFee)}</span></small></h6>
           </div>
 
           <div className='two-fr'>
-            <h6>
-              <small>CC Fee (3%):</small>
-            </h6>
+            <h6><small>Cash: </small></h6>
           </div>
           <div>
-            <h6>
-              <small><span className="accent">{formatCurrency(creditCardFeesThisShift)}</span></small>
-            </h6>
-          </div>
-          <div></div>
-          <div></div>
-
-          <div className='two-fr'>
-            <h6>
-              <small>Cash: </small>
-            </h6>
-          </div>
-          <div>
-            <h6>
-              <small><span className="accent">{formatCurrency(cashTotalsThisShift)}</span></small>
-            </h6>
+            <h6><small><span className="accent">{formatCurrency(cashTotalsThisShift)}</span></small></h6>
           </div>
 
           <div>
-            <h6>
-              <small>Tips: </small>
-            </h6>
+            <h6><small>Tips: </small></h6>
           </div>
           <div>
-            <h6>
-              <small><span className="accent">{formatCurrency(cashTipsThisShift)}</span> </small>
-            </h6>
+            <h6><small><span className="accent">{formatCurrency(cashTipsThisShift)}</span></small></h6>
           </div>
 
           <div className='two-fr'>
-            <h6>
-              <small>Gift Card: </small>
-            </h6>
+            <h6><small>Gift Card: </small></h6>
           </div>
           <div>
-            <h6>
-              <small><span className="accent">{formatCurrency(giftTotalsThisShift)}</span></small>
-            </h6>
+            <h6><small><span className="accent">{formatCurrency(giftTotalsThisShift)}</span></small></h6>
           </div>
 
           <div>
-            <h6>
-            <small>Tips: </small>
-            </h6>
+            <h6><small>Tips: </small></h6>
           </div>  
           <div>
-            <h6>
-            <small><span className="accent">{formatCurrency(giftTipsThisShift)}</span> </small>
-            </h6>
+            <h6><small><span className="accent">{formatCurrency(giftTipsThisShift)}</span></small></h6>
           </div>  
 
-        <div className='two-fr'>
-          <h6>
-            <small>Grand Total:</small>
-          </h6>
-        </div>
-        <div>
-          <h6>
-            <small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift)}</span></small>
-          </h6>
-        </div>
+          <div className='two-fr'>
+            <h6><small>Grand Total:</small></h6>
+          </div>
+          <div>
+            <h6><small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift)}</span></small></h6>
+          </div>
 
-        <div className='two-fr'>
-          <h6>
-            <small>Total + CC Fee:</small>
-          </h6>
-        </div>
-        <div>
-          <h6>
-            <small><span className="accent">{formatCurrency(creditCardTotalsThisShift + cashTotalsThisShift + giftTotalsThisShift + creditCardFeesThisShift)}</span></small>
-          </h6>
-        </div>
-        <div></div>
-        <div></div>
+          <div>
+            <h6><small> All Tips: </small></h6>
+          </div>
+          <div>
+            <h6><small><span className="accent">{formatCurrency(creditCardTipsThisShift + cashTipsThisShift + giftTipsThisShift)}</span></small></h6>
+          </div>
 
-        <div>
-          <h6>
-            <small> All Tips: </small>
-          </h6>
-        </div>
-        <div>
-          <h6>
-            <small><span className="accent">{formatCurrency(creditCardTipsThisShift + cashTipsThisShift + giftTipsThisShift)}</span></small>
-          </h6>
-        </div>
         </div>
     </div>
   )
