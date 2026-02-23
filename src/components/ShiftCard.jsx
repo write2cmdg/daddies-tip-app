@@ -123,13 +123,13 @@ const ShiftCard = ({shift}) => {
           <div className='two-fr'>
             <h6>
               <small>
-                {shift.day}{" "}
                 {!isEditingDate ? (
                   <span
                     style={{ textDecoration: "underline", cursor: "pointer" }}
                     onClick={() => setIsEditingDate(true)}
+                    title="Click to edit date"
                   >
-                    {shift.date}
+                    {shift.day} {shift.date}
                   </span>
                 ) : (
                   <input

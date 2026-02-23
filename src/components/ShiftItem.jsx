@@ -9,15 +9,17 @@ const shiftAbbreviations = {
   Brunch: 'B',
   Delivery: 'GO',
 }
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  if (isNaN(date)) return dateString
-  const mm = String(date.getMonth() + 1).padStart(2, '0')
-  const dd = String(date.getDate()).padStart(2, '0')
-  const yy = String(date.getFullYear()).slice(-2)
-  return `${mm}/${dd}/${yy}`
-}
 
+const formatDate = (dateString) => {
+  // stored format is "MM-DD-YY" -> display "MM/DD/YY"
+  const s = String(dateString || "");
+  const parts = s.split("-");
+  if (parts.length === 3) {
+    const [mm, dd, yy] = parts;
+    if (mm && dd && yy) return `${mm}/${dd}/${yy}`;
+  }
+  return s;
+}
 
 const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusToggle }) => {
   const thisShift = getAllMatchingItems({
@@ -42,7 +44,7 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
     : "";
 
   const cellStyle = {
-    fontSize: '0.65rem',     // Smaller text
+    fontSize: '0.65rem',
     padding: '0.1rem 0.1rem',
     lineHeight: '1',
     whiteSpace: 'nowrap',
@@ -63,7 +65,7 @@ const ShiftItem = ({ shift, dueTips, tipsStatus, onDueTipsChange, onTipsStatusTo
           onChange={handleChange}
           className="input input--dueTips"
           style={{
-            width: '4.25rem',              // wider for 999.99
+            width: '4.25rem',
             fontSize: '0.65rem',
             textAlign: 'left',
             fontVariantNumeric: 'tabular-nums',
