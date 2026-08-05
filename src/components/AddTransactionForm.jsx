@@ -36,7 +36,7 @@ const AddTransactionForm = () => {
     setter((parseInt(inputValue, 10) / 100).toFixed(2));
   };
 
-  const feePreview = checkTotal ? (Number(checkTotal) * 0.03).toFixed(2) : "";
+  const feePreview = checkTotal ? (Number(checkTotal) * 0.036).toFixed(2) : "";
   const totalWithFeePreview = checkTotal
     ? (Number(checkTotal) + Number(feePreview)).toFixed(2)
     : "";
@@ -62,7 +62,7 @@ const AddTransactionForm = () => {
 
             {checkTotal && (
               <div style={{ display: "grid", gap: ".25rem" }}>
-                <p>3% fee: ${feePreview}</p>
+                <p>3.6% fee: ${feePreview}</p>
               </div>
             )}
             
