@@ -204,7 +204,7 @@ const ShiftCard = ({shift}) => {
           </div>
 
           <div>
-            <h6><small>Total + Fee:</small></h6>
+            <h6><small>Total + 3.6 Fee:</small></h6>
           </div>
           <div>
             <h6><small><span className="accent">{formatCurrency(totalWithFee)}</span></small></h6>
