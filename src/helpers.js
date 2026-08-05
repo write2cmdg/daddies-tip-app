@@ -63,7 +63,7 @@ const day = currentDate.toLocaleDateString('en-US', { weekday: 'short' });
 // fee calc using cent math (per-transaction rounding)
 const calcFee = (check) => {
     const checkCents = Math.round((Number(check) || 0) * 100);
-    const feeCents = Math.round(checkCents * 3 / 100);
+    const feeCents = Math.round(checkCents * 3.6 / 100);
     return (feeCents / 100).toFixed(2);
 };
 
