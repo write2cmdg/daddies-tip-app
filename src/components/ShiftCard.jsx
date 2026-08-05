@@ -197,7 +197,7 @@ const ShiftCard = ({shift}) => {
           </div>
 
           <div>
-            <h6><small>CC Fee (3%):</small></h6>
+            <h6><small>CC Fee (3.6%):</small></h6>
           </div>
           <div>
             <h6><small><span className="accent">{formatCurrency(creditCardFeesThisShift)}</span></small></h6>
